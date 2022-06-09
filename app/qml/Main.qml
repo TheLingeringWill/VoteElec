@@ -1,5 +1,6 @@
 import Felgo 3.0
 import QtQuick 2.0
+import com.yourcompany.wizardEVAP.VoteElec 1.0
 
 App {
     // You get free licenseKeys from https://felgo.com/licenseKey
@@ -14,11 +15,34 @@ App {
         Page {
             title: qsTr("Main Page2")
 
-            Image {
-                source: "../assets/felgo-logo.png"
-                anchors.centerIn: parent
+            AppTextField {
+                Person{
+                    id:person
+
+
+                }
+                text: person.firstName
+                placeholderText: qsTr("jfjd")
+                anchors.centerIn:parent
+
+
+                onTextChanged: {
+                    person.firstName = text
+                    console.log(election.firstName)
+
+                }
+
             }
+            }
+
+
         }
 
-    }
+
 }
+
+/*##^##
+Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+##^##*/

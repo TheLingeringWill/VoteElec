@@ -35,7 +35,6 @@ DEPLOYMENTFOLDERS += assetsFolder
 
 # The .cpp file which was generated for your project. Feel free to hack it.
 SOURCES += app/VoteElec.cpp \
-    app/election.cpp \
     app/res/adresse.cpp \
     app/res/candidate.cpp \
     app/res/election.cpp \
@@ -63,8 +62,12 @@ macx {
 
 HEADERS += \
     app/res/Gender.h \
+    app/res/User.h \
     app/res/adresse.h \
     app/res/candidate.h \
     app/res/election.h \
     app/res/elector.h \
     app/res/person.h
+
+DISTFILES += \
+    app/qml/test.qml

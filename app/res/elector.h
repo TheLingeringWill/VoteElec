@@ -7,8 +7,7 @@ class Elector : public Person
 {
 public:
     Elector();
-    Elector(const Elector&) = default;
-    Elector(Elector&&) = default;
+
     ~Elector() = default;
 
     Elector(const QString& numElector,const QString& password);

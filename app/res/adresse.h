@@ -3,7 +3,7 @@
 
 #include<QObject>
 
-class Adresse
+class Adresse : public QObject
 {
 public:
 
@@ -13,6 +13,7 @@ public:
             const QString& nameStreet,
             const QString& postalCode,
             const QString& city);
+    Adresse(const Adresse& adresse){}
 
     unsigned numberStreet() const;
     void setNumberStreet(const unsigned &numberStreet);
@@ -29,8 +30,6 @@ private:
     QString nameStreet_;
     QString postalCode_;
     QString city_;
-
-
 };
 
 #endif // ADRESSE_H

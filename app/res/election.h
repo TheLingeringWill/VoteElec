@@ -7,9 +7,10 @@
 class Election : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
 
 public:
-    Election(QObject * parent = 0) : QObject(parent) {};
+    explicit Election(QObject * parent = 0) : QObject(parent) {};
 
 
     QString name() const;
@@ -20,6 +21,11 @@ public:
 
     QDate date() const;
     void setDate(const QDate &date);
+
+signals:
+    void nameChanged();
+
+
 
 private:
     QString name_;
