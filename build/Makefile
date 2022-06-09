@@ -52,8 +52,16 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../app/VoteElec.cpp qrc_resources_user.cpp
+SOURCES       = ../app/VoteElec.cpp \
+		../app/res/adresse.cpp \
+		../app/res/candidate.cpp \
+		../app/res/elector.cpp \
+		../app/res/person.cpp qrc_resources_user.cpp
 OBJECTS       = VoteElec.o \
+		adresse.o \
+		candidate.o \
+		elector.o \
+		person.o \
 		qrc_resources_user.o
 DIST          = /home/Felgo/Felgo/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/Felgo/Felgo/gcc_64/mkspecs/common/unix.conf \
@@ -229,6 +237,7 @@ DIST          = /home/Felgo/Felgo/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/Felgo/Felgo/gcc_64/mkspecs/features/qt_config.prf \
 		/home/Felgo/Felgo/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/home/Felgo/Felgo/gcc_64/mkspecs/features/spec_post.prf \
+		../.qmake.stash \
 		/home/Felgo/Felgo/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/home/Felgo/Felgo/gcc_64/mkspecs/features/toolchain.prf \
 		/home/Felgo/Felgo/gcc_64/mkspecs/features/default_pre.prf \
@@ -251,7 +260,15 @@ DIST          = /home/Felgo/Felgo/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/Felgo/Felgo/gcc_64/mkspecs/features/exceptions.prf \
 		/home/Felgo/Felgo/gcc_64/mkspecs/features/yacc.prf \
 		/home/Felgo/Felgo/gcc_64/mkspecs/features/lex.prf \
-		../../VoteElec.pro  ../app/VoteElec.cpp
+		../../VoteElec.pro ../app/res/Gender.h \
+		../app/res/adresse.h \
+		../app/res/candidate.h \
+		../app/res/elector.h \
+		../app/res/person.h ../app/VoteElec.cpp \
+		../app/res/adresse.cpp \
+		../app/res/candidate.cpp \
+		../app/res/elector.cpp \
+		../app/res/person.cpp
 QMAKE_TARGET  = VoteElec
 DESTDIR       = 
 TARGET        = VoteElec
@@ -437,6 +454,7 @@ Makefile: ../VoteElec.pro ../../../../Felgo/Felgo/gcc_64/mkspecs/features/spec_p
 		../../../../Felgo/Felgo/gcc_64/mkspecs/features/qt_config.prf \
 		../../../../Felgo/Felgo/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../../../Felgo/Felgo/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../../Felgo/Felgo/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../../Felgo/Felgo/gcc_64/mkspecs/features/toolchain.prf \
 		../../../../Felgo/Felgo/gcc_64/mkspecs/features/default_pre.prf \
@@ -636,6 +654,7 @@ Makefile: ../VoteElec.pro ../../../../Felgo/Felgo/gcc_64/mkspecs/features/spec_p
 ../../../../Felgo/Felgo/gcc_64/mkspecs/features/qt_config.prf:
 ../../../../Felgo/Felgo/gcc_64/mkspecs/linux-g++/qmake.conf:
 ../../../../Felgo/Felgo/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../../Felgo/Felgo/gcc_64/mkspecs/features/exclusive_builds.prf:
 ../../../../Felgo/Felgo/gcc_64/mkspecs/features/toolchain.prf:
 ../../../../Felgo/Felgo/gcc_64/mkspecs/features/default_pre.prf:
@@ -676,7 +695,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../Felgo/Felgo/gcc_64/mkspecs/common/felgo/resources_user.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../Felgo/Felgo/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../app/VoteElec.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../app/res/Gender.h ../app/res/adresse.h ../app/res/candidate.h ../app/res/elector.h ../app/res/person.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../app/VoteElec.cpp ../app/res/adresse.cpp ../app/res/candidate.cpp ../app/res/elector.cpp ../app/res/person.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -875,8 +895,259 @@ VoteElec.o: ../app/VoteElec.cpp ../../../../Felgo/Felgo/gcc_64/include/QtWidgets
 		../../../../Felgo/Felgo/gcc_64/include/Felgo/felgoliveclient.h \
 		../../../../Felgo/Felgo/gcc_64/include/QtQml/QQmlEngine \
 		../../../../Felgo/Felgo/gcc_64/include/QtCore/QString \
-		../../../../Felgo/Felgo/gcc_64/include/QtCore/QPointer
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/QPointer \
+		../app/res/elector.h \
+		../app/res/person.h \
+		../app/res/adresse.h \
+		../app/res/Gender.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/QDate \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qdatetime.h \
+		../app/res/candidate.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o VoteElec.o ../app/VoteElec.cpp
+
+adresse.o: ../app/res/adresse.cpp ../app/res/adresse.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/QObject \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qobject.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qnamespace.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qglobal.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qconfig.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qtcore-config.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qlogging.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qflags.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qatomic.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qmutex.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qnumeric.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstring.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qchar.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qbytearray.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qrefcount.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qarraydata.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringliteral.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringview.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qlist.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qiterator.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qpair.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qvector.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qcontainertools_impl.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qpoint.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringlist.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qregexp.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qmetatype.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qobject_impl.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o adresse.o ../app/res/adresse.cpp
+
+candidate.o: ../app/res/candidate.cpp ../app/res/candidate.h \
+		../app/res/person.h \
+		../app/res/adresse.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/QObject \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qobject.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qnamespace.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qglobal.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qconfig.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qtcore-config.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qlogging.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qflags.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qatomic.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qmutex.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qnumeric.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstring.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qchar.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qbytearray.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qrefcount.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qarraydata.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringliteral.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringview.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qlist.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qiterator.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qpair.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qvector.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qcontainertools_impl.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qpoint.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringlist.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qregexp.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qmetatype.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qobject_impl.h \
+		../app/res/Gender.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/QDate \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qdatetime.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qshareddata.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qhash.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o candidate.o ../app/res/candidate.cpp
+
+elector.o: ../app/res/elector.cpp ../app/res/elector.h \
+		../app/res/person.h \
+		../app/res/adresse.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/QObject \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qobject.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qnamespace.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qglobal.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qconfig.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qtcore-config.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qlogging.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qflags.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qatomic.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qmutex.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qnumeric.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstring.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qchar.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qbytearray.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qrefcount.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qarraydata.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringliteral.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringview.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qlist.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qiterator.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qpair.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qvector.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qcontainertools_impl.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qpoint.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringlist.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qregexp.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qmetatype.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qobject_impl.h \
+		../app/res/Gender.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/QDate \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qdatetime.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qshareddata.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qhash.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o elector.o ../app/res/elector.cpp
+
+person.o: ../app/res/person.cpp ../app/res/person.h \
+		../app/res/adresse.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/QObject \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qobject.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qnamespace.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qglobal.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qconfig.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qtcore-config.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qlogging.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qflags.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qatomic.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qmutex.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qnumeric.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstring.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qchar.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qbytearray.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qrefcount.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qarraydata.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringliteral.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringview.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qlist.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qiterator.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qpair.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qvector.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qcontainertools_impl.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qpoint.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringlist.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qregexp.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qmetatype.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qobject_impl.h \
+		../app/res/Gender.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/QDate \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qdatetime.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qshareddata.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qhash.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o person.o ../app/res/person.cpp
 
 qrc_resources_user.o: qrc_resources_user.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources_user.o qrc_resources_user.cpp

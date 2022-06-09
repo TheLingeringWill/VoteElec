@@ -34,7 +34,13 @@ DEPLOYMENTFOLDERS += assetsFolder
 
 
 # The .cpp file which was generated for your project. Feel free to hack it.
-SOURCES += app/VoteElec.cpp
+SOURCES += app/VoteElec.cpp \
+    app/election.cpp \
+    app/res/adresse.cpp \
+    app/res/candidate.cpp \
+    app/res/election.cpp \
+    app/res/elector.cpp \
+    app/res/person.cpp
 
 
 android {
@@ -54,3 +60,11 @@ win32 {
 macx {
     ICON = macx/app_icon.icns
 }
+
+HEADERS += \
+    app/res/Gender.h \
+    app/res/adresse.h \
+    app/res/candidate.h \
+    app/res/election.h \
+    app/res/elector.h \
+    app/res/person.h

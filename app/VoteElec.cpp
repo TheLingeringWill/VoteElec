@@ -5,7 +5,7 @@
 
 // uncomment this line to add the Live Client Module and use live reloading with your custom C++ code
 #include <FelgoLiveClient>
-
+/*
 int main(int argc, char *argv[])
 {
 
@@ -40,4 +40,22 @@ int main(int argc, char *argv[])
     FelgoLiveClient client (&engine);
 
     return app.exec();
+}
+*/
+
+#include"res/elector.h"
+#include"res/candidate.h"
+#include<iostream>
+int main(int argc, char *argv[])
+{
+
+    Adresse adresse{3,"fdj","fdjk","lecvallois"};
+    Person person{"elbaz","lfd","fdk",MAN,{1995,5,17},adresse};
+    std::cout << person <<std::endl;
+
+    Elector elector{"dfk","dfkj","fdjk","fkd","fkdj",MAN,{1995,4,9},adresse};
+
+    std::cout<< (const Candidate&)(elector) << std::endl;
+
+
 }
