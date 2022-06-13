@@ -18,7 +18,7 @@ App {
             AppTextField {
                 Person{
                     id:person
-
+                    onFirstNameChanged: console.log("haha")
 
                 }
                 text: person.firstName
@@ -28,7 +28,8 @@ App {
 
                 onTextChanged: {
                     person.firstName = text
-                    console.log(election.firstName)
+                    console.log(person.firstName)
+                    person.firstNameChanged()
 
                 }
 

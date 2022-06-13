@@ -5,26 +5,76 @@
 
 class Adresse : public QObject
 {
+
+    Q_OBJECT
+    Q_PROPERTY(unsigned numberStreet READ numberStreet WRITE setNumberStreet)
+    Q_PROPERTY(QString nameStreet READ nameStreet WRITE setNameStreet)
+    Q_PROPERTY(QString postalCode READ postalCode WRITE setPostalCode)
+    Q_PROPERTY(QString city READ city WRITE setCity)
+
 public:
 
     Adresse() = default;
 
-    Adresse(unsigned numberStreet,
+    explicit Adresse(unsigned numberStreet,
             const QString& nameStreet,
             const QString& postalCode,
-            const QString& city);
-    Adresse(const Adresse& adresse){}
+            const QString& city):
+        numberStreet_{numberStreet},
+        nameStreet_{nameStreet},
+        postalCode_{postalCode},
+        city_{city}
+    {
+    }
 
-    unsigned numberStreet() const;
-    void setNumberStreet(const unsigned &numberStreet);
+    Adresse(const Adresse& adresse) :
+        Adresse{adresse.numberStreet_,
+                adresse.nameStreet_,
+                adresse.postalCode_,
+                adresse.city_}
+    {
+    }
 
-    QString nameStreet() const;
-    void setNameStreet(const QString &nameStreet);
+    unsigned numberStreet() const{
+        return numberStreet_;
+    }
 
-    QString postalCode() const;
-    void setPostalCode(const QString &postalCode);
+    void setNumberStreet(const unsigned &numberStreet){
+        numberStreet_ = numberStreet;
+    }
 
-    friend std::ostream& operator<<(std::ostream& os, const Adresse& adresse);
+    QString nameStreet() const{
+        return nameStreet_;
+    }
+
+    void setNameStreet(const QString &nameStreet){
+        nameStreet_ = nameStreet;
+    }
+
+    QString postalCode() const{
+        return postalCode_;
+    }
+
+    void setPostalCode(const QString &postalCode){
+        postalCode_ = postalCode;
+    }
+
+    QString city() const{
+        return city_;
+    }
+
+    void setCity(const QString& city){
+        city_ = city;
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, const Adresse& adresse)
+    {
+        return os << adresse.numberStreet_             << ' '
+                  << adresse.nameStreet_.toStdString() << ' '
+                  << adresse.postalCode_.toStdString() << ' '
+                  << adresse.city_.toStdString();
+    }
+
 private:
     unsigned numberStreet_;
     QString nameStreet_;

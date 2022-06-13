@@ -25,8 +25,6 @@ public:
 signals:
     void nameChanged();
 
-
-
 private:
     QString name_;
     QString description_;

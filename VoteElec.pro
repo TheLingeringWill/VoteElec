@@ -61,7 +61,6 @@ macx {
 }
 
 HEADERS += \
-    app/res/Gender.h \
     app/res/User.h \
     app/res/adresse.h \
     app/res/candidate.h \
