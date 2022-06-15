@@ -1,6 +1,6 @@
 import Felgo 3.0
 import QtQuick 2.0
-import com.yourcompany.wizardEVAP.VoteElec 1.0
+
 
 App {
     // You get free licenseKeys from https://felgo.com/licenseKey
@@ -12,29 +12,9 @@ App {
 
     NavigationStack {
 
-        Page {
-            title: qsTr("Main Page2")
 
-            AppTextField {
-                Person{
-                    id:person
-                    onFirstNameChanged: console.log("haha")
-
-                }
-                text: person.firstName
-                placeholderText: qsTr("jfjd")
-                anchors.centerIn:parent
-
-
-                onTextChanged: {
-                    person.firstName = text
-                    console.log(person.firstName)
-                    person.firstNameChanged()
-
-                }
-
-            }
-            }
+CandidateProgram{
+}
 
 
         }

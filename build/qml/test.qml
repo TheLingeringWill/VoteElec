@@ -1,28 +1,23 @@
 import QtQuick 2.0
 import Felgo 3.0
 
-Page{
+Page
+{
     id: page
-    property alias element: element
-
-    Flow {
-        id: element
-        x: 107
-        y: 34
-        width: 400
-        height: 400
-
-        AppText {
-            id: appText
-            text: qsTr("AppText")
-        }
-
-        AppText {
-            id: appText1
-            text: qsTr("AppText")
-        }
+    Rectangle {
+        id: rectangle
+        x: 220
+        width: 200
+        height: 200
+        color: "#ffffff"
+        anchors.top: parent.top
+        anchors.topMargin: 17
     }
-
-
-
+    
 }
+
+/*##^##
+Designer {
+    D{i:0;autoSize:true;height:480;width:640}D{i:1;anchors_y:17}
+}
+##^##*/

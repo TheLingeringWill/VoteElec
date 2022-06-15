@@ -69,4 +69,6 @@ HEADERS += \
     app/res/person.h
 
 DISTFILES += \
-    app/qml/test.qml
+    app/qml/CandidateProgram.qml \
+    app/qml/MainPage.qml \
+    app/qml/Test.qml
