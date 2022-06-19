@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.9
 import Felgo 3.0
 import QtQuick.Layouts 1.1
 
@@ -44,27 +44,28 @@ FlickablePage
         anchors.topMargin: 200
 
         // Space between element in column
-        spacing: dp(parent.width/12)
-
+        spacing: dp(40)
         Row
         {
             id: row
             anchors.horizontalCenter: parent.horizontalCenter
-            height: 200
-            spacing: dp(40)
+            width:parent.width - dp(Theme.navigationBar.defaultBarItemPadding)*2
+
+
+            spacing: dp(Theme.navigationBar.defaultBarItemPadding)
 
             AppImage
             {
                 id:president
-                width: contentCandidateProgram.width/4
-                height: contentCandidateProgram.width/4
+                fillMode: Image.PreserveAspectFit
+                height: dp(140)
                 source:"../assets/Emmanuel_Macron.png"
             }
 
             AppImage
             {
                 id: rectangle
-                width: contentCandidateProgram.width/3
+                width: parent.width - president.width - dp(Theme.navigationBar.defaultBarItemPadding)*2 < dp(300) ? parent.width - president.width - dp(Theme.navigationBar.defaultBarItemPadding)*2 : dp(300)
                 height:dp(30)
                 anchors.top: parent.top
                 anchors.topMargin: president.height/2
@@ -72,6 +73,8 @@ FlickablePage
 
                 AppText
                 {
+                    id:namePresident
+
                     text:"Emmanuel Macron"
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
@@ -94,18 +97,25 @@ FlickablePage
 
         }
 
+
         Rectangle
         {
             id: programCandidate
-            width: parent.width
-            height: dp(300)
+            width: parent.width - dp(Theme.navigationBar.defaultBarItemPadding) * 2
+            height: apercu.height
             color:Theme.secondaryBackgroundColor
             anchors.horizontalCenter: parent.horizontalCenter
+
             AppText
             {
-                text:"something"
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
+                id:apercu
+                width: parent.width
+                text:"somethingfdasjkfjsd\nfdasfkljdasfk\nja\nsdkfjdkasjf;ldjasfkljads;fk;afj;lja"
+                anchors.horizontalCenter: parent.horizontalCenter
+
+
+                leftPadding: dp(20)
+                wrapMode: AppText.WordWrap
             }
 
         }
@@ -115,105 +125,61 @@ FlickablePage
             id: appImage
             source: "../assets/Button.png"
             anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width/2
-            IconButton
+            width: grid.width
+            height: downloadProgram.height+10
+
+            GridLayout
             {
+                id:grid
 
-                anchors.right: parent.right
-                anchors.rightMargin: 0
-                icon:  IconType.download
+                AppText
+                {
+                    id:downloadProgram
+                    text:"Telecharger\nle programme complet"
+                    horizontalAlignment: Text.AlignHCenter
+                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                }
 
-            }
+                IconButton
+                {
+                    icon:  IconType.download
+                }
+             }
+        }
 
-            AppText
+        AppImage
+        {
+            id: appImage1
+            source: "../assets/Button.png"
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: grid1.width
+            height: downloadProgram.height
+
+            GridLayout
             {
+                id:grid1
 
-                text:"Telecharger\nle programme complet"
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
-                horizontalAlignment: Text.AlignHCenter
-            }
 
+
+                AppText
+                {
+                    id:vote
+                    text:"   Voter"
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                }
+
+                IconButton
+                {
+                    icon:  IconType.arrowcircleodown
+                }
+             }
         }
 
 
 
-            Row
-            {
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width
-                height: 300
 
-                Rectangle
-                {
-                    id: rectangle1
-                    anchors.left: parent.left
-                    anchors.leftMargin: 0
-                    color:Theme.secondaryBackgroundColor
-                    width:parent.width/3
-                    height:parent.height/4
-
-                    GridLayout
-                    {
-                        anchors.fill: parent
-                        width: parent.width
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        IconButton
-                        {
-                            icon:  IconType.arrowcircleleft
-
-                        }
-
-                        AppText
-                        {
-                            text:"Retour"
-
-                            Layout.fillHeight: true
-                            Layout.fillWidth: true
-                            width: parent.width
-                        }
-
-                    }
-                }
-
-                Rectangle
-                {
-                    anchors.right: parent.right
-                    anchors.rightMargin: 0
-                    color:Theme.secondaryBackgroundColor
-                    width:parent.width/3
-                    height:parent.height/4
-                    GridLayout
-                    {
-                        anchors.fill: parent
-                        width: parent.width
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        AppText
-                        {
-                            text:"      Suivant"
-
-                            Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-                            verticalAlignment: Text.AlignVCenter
-                            horizontalAlignment: Text.AlignHCenter
-                            width: parent.width
-
-
-                        }
-
-
-
-                        IconButton
-                        {
-                            icon:  IconType.arrowcircleright
-
-                        }
-
-
-
-                    }
-
-                }
-            }
 
 
 

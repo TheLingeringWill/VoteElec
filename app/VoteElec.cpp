@@ -2,10 +2,13 @@
 #include <FelgoApplication>
 
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 
 // uncomment this line to add the Live Client Module and use live reloading with your custom C++ code
 #include <FelgoLiveClient>
-#include"res/election.h"
+
+#include"res/electionlistmodel.h"
+/*
 int main(int argc, char *argv[])
 {
 
@@ -22,16 +25,23 @@ int main(int argc, char *argv[])
     // Set an optional license key from project file
     // This does not work if using Felgo Live, only for Felgo Cloud Builds and local builds
     felgo.setLicenseKey(PRODUCT_LICENSE_KEY);
-    qmlRegisterType<Person>("com.yourcompany.wizardEVAP.VoteElec",1,0,"Person");
+
     // use this during development
     // for PUBLISHING, use the entry point below
     felgo.setMainQmlFileName(QStringLiteral("qml/Main.qml"));
+
+   // CandidateListModel *clm = new CandidateListModel();
+    ElectionListModel *elm = new ElectionListModel();
+    //engine.rootContext()->setContextProperty("_candidateListModel",clm);
+    engine.rootContext()->setContextProperty("_electionListModel",elm);
 
     // use this instead of the above call to avoid deployment of the qml files and compile them into the binary with qt's resource system qrc
     // this is the preferred deployment option for publishing games to the app stores, because then your qml files and js files are protected
     // to avoid deployment of your qml files and images, also comment the DEPLOYMENTFOLDERS command in the .pro file
     // also see the .pro file for more details
     //felgo.setMainQmlFileName(QStringLiteral("qrc:/qml/Main.qml"));
+
+
 
     engine.load(QUrl(felgo.mainQmlFileName()));
 
@@ -42,7 +52,7 @@ int main(int argc, char *argv[])
     return app.exec();
 }
 
-
+*/
 /*
 #include"res/elector.h"
 #include"res/candidate.h"
@@ -61,3 +71,24 @@ int main(int argc, char *argv[])
 
 }
 */
+#include<QtSql>
+#include<QSqlDatabase>
+#include<QSqlQuery>
+int main(int argc, char *argv[])
+{
+    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+    db.setHostName("localhost");
+    db.setDatabaseName("club_efrei");
+    db.setUserName("root");
+    db.setPassword("root");
+    if (!db.open()) qDebug() << "Failed to connect to root mysql admin";
+    QSqlQuery query;
+    query.exec("SELECT * from util");
+
+    while (query.next()) {
+           QString name = query.value(0).toString();
+
+           qDebug() << name;
+       }
+
+}

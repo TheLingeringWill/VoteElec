@@ -12,9 +12,8 @@ App {
 
     NavigationStack {
 
-
-CandidateProgram{
-}
+        ListVotes{
+        }
 
 
         }
