@@ -4,7 +4,7 @@
 #include<QAbstractListModel>
 #include<QDate>
 
-
+/*
 struct Election
 {
     Election(const QString& name,
@@ -33,7 +33,13 @@ public:
     explicit ElectionListModel(QObject* parent = nullptr):
         QAbstractListModel{parent}
     {
-        m_elections<<Election("fjdksa","dfjk",{3,10,2001});
+        m_elections<<Election("fjdksa","dfjk",{2001,3,10})
+                   << Election("fjdksfdksja","dfjk",{2001,3,10})
+                   <<Election("fjcsa","dfjk",{2001,3,10})
+                  <<Election("fjdksa","dfjk",{2001,3,10})
+                <<Election("fjdfdsaksa","dfjk",{2001,3,10})
+               <<Election("fjfasfddksa","dfjk",{2001,3,10})
+              <<Election("fjdksfaa","dfjk",{2001,3,10});
 
 
     }
@@ -54,5 +60,59 @@ private:
 
 
 };
+*/
+
+#include<QSqlQueryModel>
+
+/*
+class ElectionSqlModel : public QSqlQueryModel
+{
+    Q_OBJECT
+
+public:
+    explicit ElectionSqlModel(QObject *parent)
+};
+*/
+
+
+class ElectionListModel : public QSqlQueryModel
+{
+    Q_OBJECT
+
+public:
+
+    explicit ElectionListModel(QObject* parent = nullptr):
+        QSqlQueryModel{parent}
+    {
+
+
+
+    }
+
+    enum Roles
+    {
+        NameRole = Qt::UserRole,
+        DescriptionRole,
+        DateRole
+    };
+
+    void setQuery(const QString &query, const QSqlDatabase &db = QSqlDatabase());
+   void setQuery(const QSqlQuery &query);
+   QVariant data(const QModelIndex &index, int role) const;
+   QHash<int, QByteArray> roleNames() const {	return m_roleNames;	}
+   QHash<int, QByteArray> m_roleNames;
+private:
+   void generateRoleNames();
+
+
+
+
+
+
+
+
+};
+
+
 
 #endif // ELECTIONLISTMODEL_H

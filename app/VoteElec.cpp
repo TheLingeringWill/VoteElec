@@ -7,8 +7,10 @@
 // uncomment this line to add the Live Client Module and use live reloading with your custom C++ code
 #include <FelgoLiveClient>
 
-#include"res/electionlistmodel.h"
-/*
+
+#include"res/vesqlquerymodel.h"
+#include<QSqlError>
+
 int main(int argc, char *argv[])
 {
 
@@ -30,10 +32,12 @@ int main(int argc, char *argv[])
     // for PUBLISHING, use the entry point below
     felgo.setMainQmlFileName(QStringLiteral("qml/Main.qml"));
 
-   // CandidateListModel *clm = new CandidateListModel();
-    ElectionListModel *elm = new ElectionListModel();
-    //engine.rootContext()->setContextProperty("_candidateListModel",clm);
-    engine.rootContext()->setContextProperty("_electionListModel",elm);
+
+    VESqlQueryModel *vsqm = new VESqlQueryModel();
+
+    engine.rootContext()->setContextProperty("_electionListModel",vsqm);
+
+
 
     // use this instead of the above call to avoid deployment of the qml files and compile them into the binary with qt's resource system qrc
     // this is the preferred deployment option for publishing games to the app stores, because then your qml files and js files are protected
@@ -43,16 +47,16 @@ int main(int argc, char *argv[])
 
 
 
-    engine.load(QUrl(felgo.mainQmlFileName()));
+    //engine.load(QUrl(felgo.mainQmlFileName()));
 
     // to start your project as Live Client, comment (remove) the lines "felgo.setMainQmlFileName ..." & "engine.load ...",
     // and uncomment the line below
-    //FelgoLiveClient client (&engine);
+    FelgoLiveClient client (&engine);
 
     return app.exec();
 }
 
-*/
+
 /*
 #include"res/elector.h"
 #include"res/candidate.h"
@@ -71,24 +75,17 @@ int main(int argc, char *argv[])
 
 }
 */
+
+
 #include<QtSql>
 #include<QSqlDatabase>
 #include<QSqlQuery>
-int main(int argc, char *argv[])
+/*
+int main()
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("localhost");
-    db.setDatabaseName("club_efrei");
-    db.setUserName("root");
-    db.setPassword("root");
-    if (!db.open()) qDebug() << "Failed to connect to root mysql admin";
-    QSqlQuery query;
-    query.exec("SELECT * from util");
 
-    while (query.next()) {
-           QString name = query.value(0).toString();
 
-           qDebug() << name;
-       }
+
 
 }
+*/

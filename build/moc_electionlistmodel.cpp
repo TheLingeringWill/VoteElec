@@ -64,7 +64,7 @@ void ElectionListModel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
 }
 
 QT_INIT_METAOBJECT const QMetaObject ElectionListModel::staticMetaObject = { {
-    QMetaObject::SuperData::link<QAbstractListModel::staticMetaObject>(),
+    QMetaObject::SuperData::link<QSqlQueryModel::staticMetaObject>(),
     qt_meta_stringdata_ElectionListModel.data,
     qt_meta_data_ElectionListModel,
     qt_static_metacall,
@@ -83,12 +83,12 @@ void *ElectionListModel::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_ElectionListModel.stringdata0))
         return static_cast<void*>(this);
-    return QAbstractListModel::qt_metacast(_clname);
+    return QSqlQueryModel::qt_metacast(_clname);
 }
 
 int ElectionListModel::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QAbstractListModel::qt_metacall(_c, _id, _a);
+    _id = QSqlQueryModel::qt_metacall(_c, _id, _a);
     return _id;
 }
 QT_WARNING_POP
