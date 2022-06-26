@@ -3,12 +3,14 @@ import QtQuick 2.0
 import "pages"
 
 App
-{
+{   /*
     Navigation
     {
         id:navigation
         navigationMode: navigationModeDrawer
         drawerFixed : false
+
+
 
         NavigationItem
         {
@@ -16,6 +18,7 @@ App
             icon:IconType.cogs
             NavigationStack
             {
+
                 MainPage{
 
                 }
@@ -73,14 +76,21 @@ App
         {
             title:"Me déconnecter"
             icon:IconType.anchor
+
             NavigationStack
             {
 
             }
         }
     }
+    */
+    Navigation{
+        NavigationItem{
+            Component.onCompleted: _electionListModel.setQuery("SELECT * FROM Election")
+            UserInfo{}
 
-
+        }
+    }
 }
 
 /*##^##
