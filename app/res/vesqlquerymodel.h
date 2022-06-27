@@ -14,7 +14,8 @@ public:
 
     ~VESqlQueryModel() = default;
 
-    Q_INVOKABLE void setQuery(const QString &query);
+    Q_INVOKABLE void getElection();
+    Q_INVOKABLE void getCandidate();
 
     QVariant data(const QModelIndex &index, int role) const override;
 
@@ -25,7 +26,21 @@ public:
 private:
     void generateRoleNames();
     QHash<int, QByteArray> m_roleNames;
+    void setQuery(const QString &query);
 };
+
+inline void VESqlQueryModel::getElection()
+{
+    setQuery("SELECT * FROM Election");
+}
+
+inline void VESqlQueryModel::getCandidate()
+{
+    setQuery("SELECT p.first_name, p.last_name, c.program, c.picture "
+             "FROM Candidate c "
+             "INNER JOIN Person p "
+             "ON p.person_id=c.person_id");
+}
 
 inline void VESqlQueryModel::setQuery(const QString & query)
 {

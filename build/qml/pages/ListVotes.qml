@@ -69,13 +69,13 @@ FlickablePage
                         color:Theme.secondaryBackgroundColor
                         anchors.horizontalCenter: parent.horizontalCenter
                         AppText{
-                            text:model.nom_election
+                            text:model.name
                             anchors.left: parent.left
                             anchors.leftMargin: 20
                         }
 
                         AppText{
-                            text:model.debut_election
+                            text:model.start_date
                             anchors.horizontalCenter: parent.horizontalCenter
 
                         }
@@ -88,7 +88,17 @@ FlickablePage
                             anchors.rightMargin: 20
                             IconButton{
                                 anchors.fill: parent
-                                onClicked: listVotes.navigationStack.push(navSubmitVote)
+
+
+
+                                onClicked:{
+
+                                    _candidateListModel.getCandidate()
+                                    listVotes.navigationStack.push(navSubmitVote)
+
+
+
+                                }
 
                             }
 

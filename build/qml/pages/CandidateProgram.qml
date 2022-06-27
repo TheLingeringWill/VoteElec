@@ -8,6 +8,16 @@ FlickablePage
     flickable.contentHeight: Math.max(flickable.height, contentCandidateProgram.height*2 )
     flickable.contentWidth: width
     scrollIndicator.visible: true
+    property string name:""
+
+
+    Connections{
+        target: logic
+        onFetchCandidateDetails:{
+            name = nameCandidate
+            console.log(nameCandidate)
+        }
+    }
 
     AppImage
     {
@@ -75,7 +85,7 @@ FlickablePage
                 {
                     id:namePresident
 
-                    text:"Emmanuel Macron"
+                    text:name
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                     anchors.fill: parent
@@ -110,7 +120,7 @@ FlickablePage
             {
                 id:apercu
                 width: parent.width
-                text:"somethingfdasjkfjsd\nfdasfkljdasfk\nja\nsdkfjdkasjf;ldjasfkljads;fk;afj;lja"
+                text:""
                 anchors.horizontalCenter: parent.horizontalCenter
 
 
@@ -176,15 +186,6 @@ FlickablePage
                 }
              }
         }
-
-
-
-
-
-
-
-
-
     }
 
 }

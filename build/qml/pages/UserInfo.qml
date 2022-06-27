@@ -1,17 +1,48 @@
-import QtQuick 2.0
+import QtQuick 2.8
 import Felgo 3.0
+import QtGraphicalEffects 1.12
 
 FlickablePage
 {
     id: userInfo
 
+    Rectangle
+    {
+        width:contentProfil.width
+        anchors.horizontalCenter: parent.horizontalCenter
+
+        AppImage
+        {
+            height: 100
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.topMargin: 20
+            anchors.leftMargin: 20
+            source: "../../assets/rep_fr.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        AppImage
+        {
+            height: 150
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            source: "../../assets/logo.png"
+            fillMode: Image.PreserveAspectFit
+        }
+    }
 
     Column
     {
         id:userInfoContent
         anchors.horizontalCenter: parent.horizontalCenter
-        width:parent.width/2
+        width:contentProfil.width
+        anchors.top: parent.top
+        anchors.topMargin: 200
         spacing: dp(Theme.navigationBar.defaultBarItemPadding)
+
         AppText
         {
             text: "Bienvenue"
@@ -24,41 +55,70 @@ FlickablePage
 
             height: dp(100)
 
-            border.color: "#0000ff"
+            border.color: "#58ff00"
             border.width: 1
             anchors.horizontalCenter: parent.horizontalCenter
+            layer.enabled: true
+            layer.effect: DropShadow
+            {
+                transparentBorder: true
+                horizontalOffset: 2
+                verticalOffset: 2
+            }
+
 
 
             Column
             {
                 anchors.fill: parent
                 width:parent.width
+                spacing:dp(Theme.navigationBar.defaultBarItemPadding)
                 AppText{
                     text:"Mon profil"
 
-                    anchors.left: parent.left
-                    anchors.leftMargin: 5
+
+                    leftPadding: dp(Theme.navigationBar.defaultBarItemPadding)
 
                 }
 
                 Grid
                 {
+                    id:contentProfil
                     columns: 2
                     spacing: dp(Theme.navigationBar.defaultBarItemPadding)
+                    columnSpacing: dp(Theme.navigationBar.defaultBarItemPadding)
+                    leftPadding: dp(Theme.navigationBar.defaultBarItemPadding)/2
+                    rightPadding: dp(Theme.navigationBar.defaultBarItemPadding)/2
+
                     AppText{
-                        text:"blabla"
+                        text:"Nom complet: dfkjlsssssfdsafdasd"
+                        fontSize: 8
+
                     }
 
                     AppText{
-                        text:"blabla"
+                        text:"Adresse postale: fadsfadsfdasf"
+                        fontSize: 8
                     }
 
                     AppText{
-                        text:"blabla"
+                        text:"Date de naissance:fadsfadsfdasfdasfasd"
+                        fontSize: 8
                     }
 
                     AppText{
-                        text:"blabla"
+                        text:"Numero de telephone: 06 58 91 32 41"
+                        fontSize: 8
+                    }
+
+                    AppText{
+                        text:"Numéro électeur:fasdfasdfdasfd"
+                        fontSize: 8
+                    }
+
+                    AppText{
+                        text:"Adresse mail:fdasfdasfas"
+                        fontSize: 8
                     }
                 }
 
@@ -73,9 +133,16 @@ FlickablePage
 
             height: dp(40) * (_electionListModel.rowCount() + 1)
 
-            border.color: "#0000ff"
+            border.color: "#58ff00"
             border.width: 1
             anchors.horizontalCenter: parent.horizontalCenter
+            layer.enabled: true
+            layer.effect: DropShadow
+            {
+                transparentBorder: true
+                horizontalOffset: 2
+                verticalOffset: 2
+            }
 
             Column
             {

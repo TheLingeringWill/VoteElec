@@ -1,16 +1,33 @@
 import Felgo 3.0
 import QtQuick 2.0
+import "logic"
+import "model"
+
 import "pages"
 
+
 App
-{   /*
+{
+    Logic{
+        id:logic
+    }
+
+
+    Connections
+    {
+        target:logic
+        onFetchListCandidates:{
+            _candidateListModel.getCandidate()
+        }
+
+    }
+
+
     Navigation
     {
         id:navigation
         navigationMode: navigationModeDrawer
         drawerFixed : false
-
-
 
         NavigationItem
         {
@@ -32,11 +49,12 @@ App
         {
             title:"Mon compte électeur"
             icon:IconType.cogs
-            Component.onCompleted: _electionListModel.setQuery("SELECT * FROM Election")
+
 
             NavigationStack
             {
 
+                UserInfo{}
             }
         }
 
@@ -46,25 +64,32 @@ App
             icon:IconType.anchor
             NavigationStack
             {
-
-                ListVotes{
+                ListVotes
+                {
 
                 }
 
                 Component
                 {
                     id:navSubmitVote
+
+
                     SubmitVote{
+                        id:sv
 
                     }
                 }
 
-                Component
+                Item
                 {
                     id:navCandidateProgram
-                    CandidateProgram{
 
+
+                    CandidateProgram{
+                        id:cp
                     }
+
+
                 }
 
 
@@ -83,14 +108,7 @@ App
             }
         }
     }
-    */
-    Navigation{
-        NavigationItem{
-            Component.onCompleted: _electionListModel.setQuery("SELECT * FROM Election")
-            UserInfo{}
 
-        }
-    }
 }
 
 /*##^##

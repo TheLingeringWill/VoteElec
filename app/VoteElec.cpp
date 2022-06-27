@@ -32,10 +32,25 @@ int main(int argc, char *argv[])
     // for PUBLISHING, use the entry point below
     felgo.setMainQmlFileName(QStringLiteral("qml/Main.qml"));
 
+    if(QSqlDatabase::isDriverAvailable("QSQLITE"))
+    {
+        QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+        db.setDatabaseName("../VoteElec.db");
 
-    VESqlQueryModel *vsqm = new VESqlQueryModel();
+        if(!db.open()){
+            qWarning() << "Error connectiong Database : " << db.lastError();
+        }
+    }
 
-    engine.rootContext()->setContextProperty("_electionListModel",vsqm);
+
+    VESqlQueryModel *electionListModel = new VESqlQueryModel(),
+                    *candidateListModel = new VESqlQueryModel;
+    electionListModel->getElection();
+
+
+
+    engine.rootContext()->setContextProperty("_electionListModel",electionListModel);
+    engine.rootContext()->setContextProperty("_candidateListModel",candidateListModel);
 
 
 

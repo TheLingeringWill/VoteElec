@@ -8,6 +8,8 @@ FlickablePage
 {
     id: submitVote
 
+
+
     AppImage
     {
         height: 100
@@ -27,6 +29,8 @@ FlickablePage
         anchors.top: parent.top
         anchors.topMargin: parent.height/4
         spacing: dp(30)
+
+
 
         Column
         {
@@ -52,6 +56,7 @@ FlickablePage
                     Component
                     {
                         id: viewCandidate
+
 
                         Column
                         {
@@ -90,7 +95,7 @@ FlickablePage
 
                                         AppText
                                         {
-                                            text: model.name
+                                            text: model.first_name + '\n' + model.last_name
                                             verticalAlignment: Text.AlignVCenter
                                             horizontalAlignment: Text.AlignHCenter
                                             anchors.fill: parent
@@ -119,7 +124,16 @@ FlickablePage
                                             IconButton
                                             {
                                                 icon:  IconType.diamond
-                                                onClicked: submitVote.navigationStack.push(navCandidateProgram)
+                                                onClicked: {
+
+                                                    logic.fetchCandidateDetails(model.first_name + '\n' + model.last_name,model.program,"")
+
+
+
+
+
+                                                    submitVote.navigationStack.push(cp)
+                                                }
                                             }
                                         }
                                     }

@@ -94,6 +94,8 @@ DIST          = ../app/qml/CandidateProgram.qml \
 		../app/qml/MainPage.qml \
 		../app/qml/SubmitVote.qml \
 		../app/qml/Test.qml \
+		../app/qml/logic/Logic.qml \
+		../app/qml/model/DataModel.qml \
 		../app/qml/pages/Login.qml \
 		../app/qml/pages/UserInfo.qml \
 		/home/Felgo/Felgo/gcc_64/mkspecs/features/spec_pre.prf \
