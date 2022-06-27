@@ -54,3 +54,9 @@ win32 {
 macx {
     ICON = macx/app_icon.icns
 }
+
+DISTFILES += \
+    app/qml/views/Create_account.qml \
+    app/qml/views/Popup.qml \
+    app/qml/views/logo.png \
+    app/qml/views/rep_fr.png
