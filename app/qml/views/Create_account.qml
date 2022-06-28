@@ -1,13 +1,14 @@
-import QtQuick 2.0
+import QtQuick 2.8
 import Felgo 3.0
 import QtQuick.Layouts 1.1
+import QtQuick.Controls 1.4
+
 
 FlickablePage{
     id: create_account
-    flickable.contentHeight: Math.max(flickable.height, sign_in_container.height * 1.5)
+    flickable.contentHeight: Math.max(flickable.height, sign_in_container.height * 1.3)
     flickable.contentWidth: width
     scrollIndicator.visible: true
-
 
 
     Rectangle{
@@ -52,7 +53,7 @@ FlickablePage{
     Rectangle{
         id : sign_in_container
         width: parent.width / 2
-        height: 1100
+        height: 1400
         color: "#f8f8f8"
         radius: 20
         border.width: 0
@@ -64,13 +65,13 @@ FlickablePage{
             id: column
             width: parent.width
             height : parent.height
+            anchors.top: parent.top
+            anchors.topMargin: 40
+            anchors.bottom: parent.top
+            anchors.bottomMargin: 40
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: 40
-
-            AppText{
-                text : " "
-            }
 
 
             AppTextField {
@@ -100,15 +101,26 @@ FlickablePage{
                 backgroundColor: "white"
                 font.pointSize: 15
             }
-            AppTextField {
-                id: date
+            Text{
+                id: date_text
+                text : "Votre date de naissance"
+                wrapMode: Text.WordWrap
+                font.pointSize: 15
                 width: parent.width / 1.5
                 height: 45
-                placeholderText: "Votre date de naissance"
                 anchors.horizontalCenter: parent.horizontalCenter
-                backgroundColor: "white"
-                font.pointSize: 15
             }
+            DatePicker{
+                datePickerMode: dateMode
+                width: parent.width / 1.5
+                anchors.horizontalCenter: parent.horizontalCenter
+                /*minimum: {
+                                var d = new Date();
+                                d.setFullYear(d.getFullYear() - 1);
+                                return d;
+                            }*/
+            }
+
             AppTextField {
                 id: tel
                 width: parent.width / 1.5
@@ -186,3 +198,8 @@ FlickablePage{
         }
     }
 }
+/*##^##
+Designer {
+    D{i:10;anchors_height:45;anchors_width:80}
+}
+##^##*/

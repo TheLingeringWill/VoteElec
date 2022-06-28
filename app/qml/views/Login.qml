@@ -1,13 +1,17 @@
-import QtQuick 2.0
+import QtQuick 2.8
 import Felgo 3.0
+import QtQuick.Layouts 1.1
 
 Page {
     id: login
+    Layout.minimumWidth: 1000
 
     Rectangle{
         id: top_page
         width: parent.width / 3
         anchors.horizontalCenter: parent.horizontalCenter
+        /*Layout.minimumWidth: 213
+        Layout.maximumWidth: 213*/
 
         AppImage
         {
@@ -18,6 +22,7 @@ Page {
             anchors.left: parent.left
             source: "../../assets/rep_fr.png"
             fillMode: Image.PreserveAspectFit
+            //Layout.minimumWidth: 170
         }
 
         AppImage
@@ -27,12 +32,14 @@ Page {
             anchors.right: parent.right
             source: "../../assets/logo.png"
             fillMode: Image.PreserveAspectFit
+            //Layout.minimumWidth: 180
         }
     }
 
     Rectangle {
         id: rect_connexion
         width: parent.width / 3
+        Layout.minimumWidth : texte.width
         height: parent.height / 2
         color: "#f8f8f8"
         radius: 20
@@ -43,8 +50,8 @@ Page {
 
         Column {
             id: column
-            anchors.bottomMargin: 10
-            anchors.topMargin: 10
+            anchors.bottomMargin: parent.height / 10
+            anchors.topMargin: parent.height / 10
             anchors.fill: parent
             spacing: parent.height / 12
 
@@ -58,6 +65,7 @@ Page {
                 font.family: "Arial"
                 horizontalAlignment: Text.AlignHCenter
                 font.pixelSize: 20
+                //Layout.minimumWidth: 600
             }
 
 
@@ -122,8 +130,6 @@ Page {
 
         }
     }
-
-
 }
 
 
@@ -131,6 +137,6 @@ Page {
 
 /*##^##
 Designer {
-    D{i:0;autoSize:true;height:480;width:640}D{i:5;anchors_height:240;anchors_width:213.33333333333334}
+    D{i:0;autoSize:true;height:480;width:640}
 }
 ##^##*/

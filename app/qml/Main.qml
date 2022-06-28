@@ -22,9 +22,9 @@ App {
                 }
 
 
-                Popup{
+                /*Popup{
 
-                }
+                }*/
 
             }
 
