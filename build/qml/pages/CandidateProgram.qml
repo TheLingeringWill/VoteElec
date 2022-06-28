@@ -9,13 +9,13 @@ FlickablePage
     flickable.contentWidth: width
     scrollIndicator.visible: true
     property string name:""
-
+    property string program:""
 
     Connections{
         target: logic
         onFetchCandidateDetails:{
             name = nameCandidate
-            console.log(nameCandidate)
+            program = programCandidate
         }
     }
 
@@ -120,7 +120,7 @@ FlickablePage
             {
                 id:apercu
                 width: parent.width
-                text:""
+                text:program
                 anchors.horizontalCenter: parent.horizontalCenter
 
 
@@ -183,6 +183,11 @@ FlickablePage
                 IconButton
                 {
                     icon:  IconType.arrowcircleodown
+                    onClicked:
+                    {
+                        candidateProgram.navigationStack.popAllExceptFirst()
+
+                    }
                 }
              }
         }

@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.1
 
 FlickablePage
 {
-    id: flickablePage
+    id: mainHomePage
     flickable.contentHeight: Math.max(flickable.height, contentMainPage.height + last.height)
     flickable.contentWidth: width
     scrollIndicator.visible: true
@@ -89,10 +89,12 @@ FlickablePage
 
                     AppButton{
                         text:"S'enregistrer"
+                        onClicked: mainHomePage.navigationStack.push(create_account_component)
                     }
 
                     AppButton{
                         text:"S'indentifier"
+                        onClicked: mainHomePage.navigationStack.push(loginPage)
                     }
                 }
 

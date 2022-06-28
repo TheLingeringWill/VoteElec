@@ -1,5 +1,7 @@
 import Felgo 3.0
 import QtQuick 2.0
+import QtQuick.Dialogs 1.2
+
 import "logic"
 import "model"
 
@@ -13,31 +15,46 @@ App
     }
 
 
-    Connections
-    {
-        target:logic
-        onFetchListCandidates:{
-            _candidateListModel.getCandidate()
-        }
 
+    DataModel
+    {
+        id:dataModel
+        dispatcher: logic
     }
+
+
 
 
     Navigation
     {
         id:navigation
-        navigationMode: navigationModeDrawer
+        navigationMode: dataModel.userLoggedIn ? navigationModeDrawer : navigationModeNone
         drawerFixed : false
 
         NavigationItem
         {
             title: "Page d'accueil"
             icon:IconType.cogs
+            id:mainHome
             NavigationStack
             {
 
                 MainPage{
 
+                }
+
+                Component{
+                        id:loginPage
+                    Login{
+
+                    }
+                }
+
+                Component{
+                    id:create_account_component
+                    CreateAccount{
+
+                    }
                 }
 
             }
@@ -62,8 +79,11 @@ App
         {
             title:"Je vote"
             icon:IconType.anchor
+            visible: false
+
             NavigationStack
             {
+
                 ListVotes
                 {
 
@@ -80,17 +100,16 @@ App
                     }
                 }
 
+
                 Item
                 {
                     id:navCandidateProgram
 
-
                     CandidateProgram{
                         id:cp
                     }
-
-
                 }
+
 
 
 
@@ -108,6 +127,9 @@ App
             }
         }
     }
+
+
+
 
 }
 

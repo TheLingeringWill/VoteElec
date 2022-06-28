@@ -44,13 +44,17 @@ int main(int argc, char *argv[])
 
 
     VESqlQueryModel *electionListModel = new VESqlQueryModel(),
-                    *candidateListModel = new VESqlQueryModel;
+                    *candidateListModel = new VESqlQueryModel(),
+                    *userInfoModel = new VESqlQueryModel();
+
+
     electionListModel->getElection();
 
 
 
     engine.rootContext()->setContextProperty("_electionListModel",electionListModel);
     engine.rootContext()->setContextProperty("_candidateListModel",candidateListModel);
+    engine.rootContext()->setContextProperty("_userInfoModel",userInfoModel);
 
 
 

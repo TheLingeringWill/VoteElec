@@ -7,6 +7,7 @@ FlickablePage
 {
     id:listVotes
 
+
     Column
     {
         id: column
@@ -52,6 +53,7 @@ FlickablePage
                 Repeater
                 {
                     id:viewListVotes
+
                     model: _electionListModel
                     delegate: viewElection
                 }
@@ -83,22 +85,21 @@ FlickablePage
 
 
                         AppText{
-                            text:"click here"
+
+                            text:!_userInfoModel.hasVoted(model.name, dataModel.userNumElector ) ? "click here" : "already voted"
                             anchors.right: parent.right
                             anchors.rightMargin: 20
                             IconButton{
                                 anchors.fill: parent
-
-
-
                                 onClicked:{
 
-                                    _candidateListModel.getCandidate()
-                                    listVotes.navigationStack.push(navSubmitVote)
-
-
-
+                                    if(parent.text=="click here")
+                                    {
+                                        logic.fetchListCandidate(model.name)
+                                        listVotes.navigationStack.push(navSubmitVote)
+                                    }
                                 }
+
 
                             }
 

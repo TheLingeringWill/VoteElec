@@ -2,16 +2,15 @@ import QtQuick 2.0
 
 Item
 {
-    signal fetchListVotes()
+    signal fetchListElection()
 
-    signal fetchListCandidates()
+    signal fetchListCandidate(string nameElection)
 
     signal fetchCandidateDetails(string nameCandidate, string programCandidate, string sourceCandidate)
 
     signal fetchUserInfo()
 
-    signal login()
-
+    signal login(string numCandidate)
     signal register()
 
     signal logout()

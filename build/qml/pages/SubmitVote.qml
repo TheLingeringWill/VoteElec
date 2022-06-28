@@ -8,8 +8,6 @@ FlickablePage
 {
     id: submitVote
 
-
-
     AppImage
     {
         height: 100
@@ -124,14 +122,9 @@ FlickablePage
                                             IconButton
                                             {
                                                 icon:  IconType.diamond
-                                                onClicked: {
-
+                                                onClicked:
+                                                {
                                                     logic.fetchCandidateDetails(model.first_name + '\n' + model.last_name,model.program,"")
-
-
-
-
-
                                                     submitVote.navigationStack.push(cp)
                                                 }
                                             }
@@ -146,6 +139,10 @@ FlickablePage
                             {
                                 text:"Vote"
                                 anchors.horizontalCenter: parent.horizontalCenter
+                                onClicked:
+                                {
+
+                                }
                             }
                         }
                     }

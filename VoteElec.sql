@@ -104,8 +104,8 @@ INSERT INTO Person VALUES
 (4,46573,'Simon','Campere','MAN','2003-09-11',3);
 
 INSERT INTO Elector VALUES
-(1,2356,'0614328943','jonathan.elbaz@gmx.com',NULL,3),
-(2,1334,'0732448288','Simon.Campere@gmx.fr',NULL,4);
+(1,'2356','0614328943','jonathan.elbaz@gmx.com','a',3),
+(2,'1334','0732448288','Simon.Campere@gmx.fr','a',4);
 
 INSERT INTO Candidate VALUES
 (1,'program','complete_program','picture',1),
@@ -119,12 +119,12 @@ INSERT INTO Election VALUES
 INSERT INTO Stands VALUES
 (1,1),
 (1,2),
-(2,1),
-(2,2);
+(2,1);
 
 INSERT INTO Participates VALUES
 (1,1,1),
-(1,2,2);
+(1,2,2),
+(2,1,1);
 
 INSERT INTO Wins VALUES
 (1,1),
