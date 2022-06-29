@@ -8,12 +8,14 @@ FlickablePage
     flickable.contentHeight: Math.max(flickable.height, contentCandidateProgram.height*2 )
     flickable.contentWidth: width
     scrollIndicator.visible: true
+    property int id:0
     property string name:""
     property string program:""
 
     Connections{
         target: logic
         onFetchCandidateDetails:{
+            id = idCandidate
             name = nameCandidate
             program = programCandidate
         }
@@ -186,6 +188,7 @@ FlickablePage
                     onClicked:
                     {
                         candidateProgram.navigationStack.popAllExceptFirst()
+                        logic.vote(id)
 
                     }
                 }

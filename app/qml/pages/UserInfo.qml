@@ -162,7 +162,7 @@ FlickablePage
                 Repeater
                 {
                     id:viewListVotes
-                    model: _electionListModel
+                    model: _userInfoModel
                     delegate: viewElection
                 }
 
@@ -180,14 +180,14 @@ FlickablePage
                         anchors.horizontalCenter: parent.horizontalCenter
                         AppText{
                             id:nameElec
-                            text:model.nom_election
+                            text:model.name
                             anchors.left: parent.left
                             anchors.leftMargin: 20
                             fontSize: 8
                         }
 
                         AppText{
-                            text:model.debut_election
+                            text:model.start_date
                             anchors.horizontalCenter: parent.horizontalCenter
                             fontSize: 8
 
@@ -196,14 +196,10 @@ FlickablePage
 
 
                         AppText{
-                            text:"click here"
+                            text: model.first_name + ' '  +model.last_name
                             anchors.right: parent.right
                             anchors.rightMargin: 20
-                            IconButton{
-                                anchors.fill: parent
-                                onClicked: listVotes.navigationStack.push(navSubmitVote)
 
-                            }
                             fontSize: 8
 
                         }

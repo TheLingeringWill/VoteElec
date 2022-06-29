@@ -2,10 +2,12 @@ import QtQuick 2.9
 import QtQuick.Controls 2.8
 import QtQml 2.0
 import Felgo 3.0
+import QtQuick.Dialogs 1.1
 
 FlickablePage
 {
     id:listVotes
+
 
 
     Column
@@ -63,6 +65,7 @@ FlickablePage
                 {
                     id:viewElection
 
+
                     Rectangle
                     {
                         id:rowVote
@@ -84,19 +87,25 @@ FlickablePage
 
 
 
-                        AppText{
 
-                            text:!_userInfoModel.hasVoted(model.name, dataModel.userNumElector ) ? "click here" : "already voted"
+
+                        AppText{
+                            id:textVote
+                            text:"click here"
+
                             anchors.right: parent.right
                             anchors.rightMargin: 20
                             IconButton{
                                 anchors.fill: parent
                                 onClicked:{
 
-                                    if(parent.text=="click here")
+                                    if( !_userInfoModel.hasVoted(model.name, dataModel.userNumElector ) )
                                     {
                                         logic.fetchListCandidate(model.name)
                                         listVotes.navigationStack.push(navSubmitVote)
+                                    }
+                                    else{
+                                       messageDialog.visible = true
                                     }
                                 }
 
@@ -104,6 +113,18 @@ FlickablePage
                             }
 
                         }
+                        MessageDialog {
+                            id: messageDialog
+                            title: "May I have your attention please"
+                            text: "It's so cool that you are using Qt Quick."
+                            onAccepted: {
+
+                                listVotes.navigationStack.popAllExceptFirst()
+                            }
+
+                        }
+
+
                     }
                 }
 

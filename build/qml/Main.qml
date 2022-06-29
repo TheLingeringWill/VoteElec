@@ -25,6 +25,7 @@ App
 
 
 
+
     Navigation
     {
         id:navigation
@@ -67,6 +68,7 @@ App
             title:"Mon compte électeur"
             icon:IconType.cogs
 
+            onSelected: logic.fetchUserInfo()
 
             NavigationStack
             {
@@ -83,7 +85,7 @@ App
 
             NavigationStack
             {
-
+                id:navVote
                 ListVotes
                 {
 
@@ -93,12 +95,13 @@ App
                 {
                     id:navSubmitVote
 
-
                     SubmitVote{
-                        id:sv
 
-                    }
-                }
+                        id:sv
+                        property string name: "cjk"
+                    }                }
+
+
 
 
                 Item
@@ -127,6 +130,8 @@ App
             }
         }
     }
+
+
 
 
 

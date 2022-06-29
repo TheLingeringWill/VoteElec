@@ -7,6 +7,8 @@ import QtQuick.Layouts 1.1
 FlickablePage
 {
     id: submitVote
+    property string name:""
+    signal voted()
 
     AppImage
     {
@@ -124,7 +126,7 @@ FlickablePage
                                                 icon:  IconType.diamond
                                                 onClicked:
                                                 {
-                                                    logic.fetchCandidateDetails(model.first_name + '\n' + model.last_name,model.program,"")
+                                                    logic.fetchCandidateDetails(model.candidate_id, model.first_name + '\n' + model.last_name,model.program,"")
                                                     submitVote.navigationStack.push(cp)
                                                 }
                                             }
@@ -141,8 +143,15 @@ FlickablePage
                                 anchors.horizontalCenter: parent.horizontalCenter
                                 onClicked:
                                 {
+                                     logic.vote(model.candidate_id)
+                                    console.log(model.candidate_id)
+                                    submitVote.navigationStack.popAllExceptFirst()
+
+
+
 
                                 }
+
                             }
                         }
                     }

@@ -95,7 +95,7 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 onClicked:
                 {
-                   if(_userInfoModel.isLogged(num_elec.text , mdp.text) ){
+                   if(_candidateListModel.isLogged(num_elec.text , mdp.text) ){
                        login.navigationStack.popAllExceptFirst()
                        logic.login(num_elec.text)
 
