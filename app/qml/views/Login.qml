@@ -4,14 +4,11 @@ import QtQuick.Layouts 1.1
 
 Page {
     id: login
-    Layout.minimumWidth: 1000
 
     Rectangle{
         id: top_page
         width: parent.width / 3
         anchors.horizontalCenter: parent.horizontalCenter
-        /*Layout.minimumWidth: 213
-        Layout.maximumWidth: 213*/
 
         AppImage
         {
@@ -22,7 +19,6 @@ Page {
             anchors.left: parent.left
             source: "../../assets/rep_fr.png"
             fillMode: Image.PreserveAspectFit
-            //Layout.minimumWidth: 170
         }
 
         AppImage
@@ -32,7 +28,6 @@ Page {
             anchors.right: parent.right
             source: "../../assets/logo.png"
             fillMode: Image.PreserveAspectFit
-            //Layout.minimumWidth: 180
         }
     }
 
@@ -43,7 +38,6 @@ Page {
         height: parent.height / 2
         color: "#f8f8f8"
         radius: 20
-        border.width: 0
         anchors.top: parent.top
         anchors.topMargin: 180
         anchors.horizontalCenter: parent.horizontalCenter
@@ -65,7 +59,6 @@ Page {
                 font.family: "Arial"
                 horizontalAlignment: Text.AlignHCenter
                 font.pixelSize: 20
-                //Layout.minimumWidth: 600
             }
 
 
@@ -77,6 +70,9 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 backgroundColor: "white"
                 font.pointSize: 15
+                validator: RegExpValidator {
+                    regExp: /[0-9]+/
+                }
             }
 
 
@@ -106,7 +102,6 @@ Page {
     }
 
 
-
     Rectangle{
         id : footer
         width: parent.width
@@ -131,7 +126,6 @@ Page {
         }
     }
 }
-
 
 
 

@@ -1,7 +1,9 @@
 import QtQuick 2.8
 import Felgo 3.0
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 1.4
+import QtQuick.Controls 2.4
+import QtQml 2.1
+import QtGraphicalEffects 1.12
 
 
 FlickablePage{
@@ -9,6 +11,10 @@ FlickablePage{
     flickable.contentHeight: Math.max(flickable.height, sign_in_container.height * 1.3)
     flickable.contentWidth: width
     scrollIndicator.visible: true
+
+    ButtonGroup{
+        id : sexe
+    }
 
 
     Rectangle{
@@ -26,7 +32,6 @@ FlickablePage{
             source: "../../assets/rep_fr.png"
             fillMode: Image.PreserveAspectFit
         }
-
         AppImage
         {
             height: 180
@@ -40,20 +45,20 @@ FlickablePage{
 
     Text {
         id: top_text
-        text: qsTr("Munissez-vous de votre numéro électeur pour créer votre compte Votelec")
+        text: qsTr("Veuillez confirmer votre identité pour créer un compte Votelec")
         anchors.top: parent.top
         anchors.topMargin: 180
         anchors.horizontalCenter: parent.horizontalCenter
         font.pointSize: 20
         horizontalAlignment: Text.AlignHCenter
         wrapMode: Text.WordWrap
-        width: parent.width / 2
+        width: parent.width / 3
     }
 
     Rectangle{
         id : sign_in_container
         width: parent.width / 2
-        height: 1400
+        height: 1200
         color: "#f8f8f8"
         radius: 20
         border.width: 0
@@ -73,7 +78,6 @@ FlickablePage{
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: 40
 
-
             AppTextField {
                 id: num_elec
                 width: parent.width / 1.5
@@ -82,90 +86,136 @@ FlickablePage{
                 anchors.horizontalCenter: parent.horizontalCenter
                 backgroundColor: "white"
                 font.pointSize: 15
+                validator: RegExpValidator {
+                    regExp: /[0-9]+/
+                }
+                property bool rightNumElec: num_elec.text.length == 8 || num_elec.text.length == 9
+                AppText {
+                     text: "Votre numéro électeur valide doit contenir 8 ou 9 chiffres"
+                     wrapMode: Text.WordWrap
+                     color: "red"
+                     fontSize: 10
+                     anchors.top: num_elec.bottom
+                     anchors.bottomMargin: dp(50)
+                     visible: (!num_elec.rightNumElec) && (num_elec.text.length > 0)
+                }
             }
+
+            AppTextField {
+                id: num_citoyen
+                width: parent.width / 1.5
+                height: 45
+                placeholderText: "Numéro citoyen"
+                anchors.horizontalCenter: parent.horizontalCenter
+                backgroundColor: "white"
+                font.pointSize: 15
+                validator: RegExpValidator {
+                    regExp: /[0-9]+/
+                }
+                property bool rightNumCitoyen: num_citoyen.text.length == 15
+                AppText {
+                     text: "Votre numéro citoyen valide doit contenir 15 chiffres"
+                     wrapMode: Text.WordWrap
+                     color: "red"
+                     fontSize: 10
+                     anchors.top: num_citoyen.bottom
+                     anchors.bottomMargin: dp(50)
+                     visible: (!num_citoyen.rightNumCitoyen) && (num_citoyen.text.length > 0)
+                }
+            }
+
             AppTextField {
                 id: nom
                 width: parent.width / 1.5
                 height: 45
-                placeholderText: "Votre nom"
+                placeholderText: "Nom"
                 anchors.horizontalCenter: parent.horizontalCenter
                 backgroundColor: "white"
                 font.pointSize: 15
+                validator: RegExpValidator {
+                    regExp: /[A-Za-zàéèçï ]+/
+                }
             }
+
             AppTextField {
                 id: prenom
                 width: parent.width / 1.5
                 height: 45
-                placeholderText: "Votre prénom"
+                placeholderText: "Prénom"
                 anchors.horizontalCenter: parent.horizontalCenter
                 backgroundColor: "white"
                 font.pointSize: 15
+                validator: RegExpValidator {
+                    regExp: /[A-Za-zàéèçï ]+/
+                }
             }
-            Text{
-                id: date_text
-                text : "Votre date de naissance"
-                wrapMode: Text.WordWrap
+
+            GroupBox{
+                title : "Sexe"
                 font.pointSize: 15
                 width: parent.width / 1.5
-                height: 45
                 anchors.horizontalCenter: parent.horizontalCenter
+
+                RowLayout{
+                    spacing: parent.width / 5
+                    RadioButton{
+                        id : box_homme
+                        ButtonGroup.group : sexe
+                        text: qsTr("Homme")
+                    }
+                    RadioButton{
+                        id : box_femme
+                        ButtonGroup.group : sexe
+                        text: qsTr("Femme")
+                    }
+                }
             }
-            DatePicker{
-                datePickerMode: dateMode
+
+            ColumnLayout{
                 width: parent.width / 1.5
                 anchors.horizontalCenter: parent.horizontalCenter
-                /*minimum: {
-                                var d = new Date();
-                                d.setFullYear(d.getFullYear() - 1);
-                                return d;
-                            }*/
+                Text{
+                    id: date_text
+                    text : "Date de naissance"
+                    wrapMode: Text.WordWrap
+                    font.pointSize: 15
+                    height: 45
+                }
+                DatePicker{
+                    id : birthday
+                    datePickerMode: dateMode
+                    width: parent.width
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    dateFormat: "dd MMM yyyy"
+                    startDate: "1901-01-01"
+                    endDate: "2004-06-30"
+
+                }
             }
 
             AppTextField {
                 id: tel
                 width: parent.width / 1.5
                 height: 45
-                placeholderText: "Votre numéro de téléphone"
+                placeholderText: "Numéro de téléphone"
                 anchors.horizontalCenter: parent.horizontalCenter
                 backgroundColor: "white"
                 font.pointSize: 15
+                validator: RegExpValidator {
+                    regExp: /[0-9]+/
+                }
+                property bool correctNumber: tel.text.length == 10
+                AppText {
+                     text: "Un numéro de téléphone valide doit contenir 10 chiffres"
+                     wrapMode: Text.WordWrap
+                     color: "red"
+                     fontSize: 10
+                     anchors.top: tel.bottom
+                     anchors.bottomMargin: dp(50)
+                     visible: (!tel.correctNumber) && (tel.text.length > 0)
+                }
             }
-            AppTextField {
-                id: num_rue
-                width: parent.width / 1.5
-                height: 45
-                placeholderText: "Numéro de rue"
-                anchors.horizontalCenter: parent.horizontalCenter
-                backgroundColor: "white"
-                font.pointSize: 15
-            }
-            AppTextField {
-                id: nom_rue
-                width: parent.width / 1.5
-                height: 45
-                placeholderText: "Nom de rue"
-                anchors.horizontalCenter: parent.horizontalCenter
-                backgroundColor: "white"
-                font.pointSize: 15
-            }
-            AppTextField {
-                id: code_postal
-                width: parent.width / 1.5
-                height: 45
-                placeholderText: "Code postal"
-                anchors.horizontalCenter: parent.horizontalCenter
-                backgroundColor: "white"
-                font.pointSize: 15
-            }
-            AppTextField {
-                id: ville
-                width: parent.width / 1.5
-                height: 45
-                placeholderText: "Ville"
-                anchors.horizontalCenter: parent.horizontalCenter
-                backgroundColor: "white"
-                font.pointSize: 15
-            }
+
             AppTextField {
                 id: mail
                 inputModeEmail: 0
@@ -175,7 +225,18 @@ FlickablePage{
                 anchors.horizontalCenter: parent.horizontalCenter
                 backgroundColor: "white"
                 font.pointSize: 15
+                property bool rightMail: (mail.text.indexOf('@') != -1) && (mail.text.lastIndexOf('.') > mail.text.indexOf('@'))
+                AppText {
+                     text: "Veuillez entrer un email valide"
+                     wrapMode: Text.WordWrap
+                     color: "red"
+                     fontSize: 10
+                     anchors.top: mail.bottom
+                     anchors.bottomMargin: dp(50)
+                     visible: (!mail.rightMail) && (mail.text.length > 0)
+                }
             }
+
             AppTextField {
                 id: mdp
                 inputModePassword: 0
@@ -185,7 +246,18 @@ FlickablePage{
                 anchors.horizontalCenter: parent.horizontalCenter
                 backgroundColor: "white"
                 font.pointSize: 15
+                property bool goodPassword: mdp.text.length > 7
+                AppText {
+                     text: "Votre mot de passe doit contenir au moins 8 caractères"
+                     wrapMode: Text.WordWrap
+                     color: "red"
+                     fontSize: 10
+                     anchors.top: mdp.bottom
+                     anchors.bottomMargin: dp(50)
+                     visible: (!mdp.goodPassword) && (mdp.text.length > 0)
+                }
             }
+
             AppButton {
                 id: btn_connect
                 width: parent.width / 2
@@ -198,8 +270,4 @@ FlickablePage{
         }
     }
 }
-/*##^##
-Designer {
-    D{i:10;anchors_height:45;anchors_width:80}
-}
-##^##*/
+

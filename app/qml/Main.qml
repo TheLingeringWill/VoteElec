@@ -15,21 +15,12 @@ App {
 
                 Component{
                     id : create_account_component
-                    Create_account{
-
-                    }
-
+                    Create_account{}
                 }
 
-
-                /*Popup{
-
-                }*/
+                //Popup{}
 
             }
-
-
         }
     }
-
 }

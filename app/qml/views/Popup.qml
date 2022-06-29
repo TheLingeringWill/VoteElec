@@ -1,11 +1,12 @@
 import QtQuick 2.8
 import Felgo 3.0
 import QtGraphicalEffects 1.12
+import QtQuick.Dialogs 1.1
+
 
 Page {
     id: popup_page
     title: "Popup"
-
 
     Rectangle{
         id : container
@@ -15,7 +16,6 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
         radius : 20
         color: "#f8f8f8"
-
 
         Rectangle {
             id: top_popup
@@ -43,11 +43,11 @@ Page {
                 Text {
                     id: attention_text
                     color: "#f8f8f8"
-                    text: qsTr("Attention")
+                    text: qsTr("Êtes-vous sûr de votre choix ?")
                     font.family: "Arial"
                     font.letterSpacing: 1
                     font.bold: true
-                    font.pointSize: 20
+                    font.pointSize: 10
                     font.capitalization: Font.AllUppercase
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -74,14 +74,16 @@ Page {
             Text{
                 id : question
                 color: "#ff0000"
-                text: qsTr("Êtes-vous sûr de votre choix ?")
+                text: qsTr("En cliquant sur Confirmer, vous ne pourrez plus modifier votre vote")
+                width : parent.width
                 anchors.top: parent.top
-                anchors.topMargin: parent.height / 6
+                anchors.topMargin: parent.height / 5
                 horizontalAlignment: Text.AlignHCenter
-                width : parent.width / 1.5
                 anchors.horizontalCenter: parent.horizontalCenter
+                leftPadding: parent.width / 15
+                rightPadding: parent.width / 15
                 wrapMode: Text.WordWrap
-                font.pointSize: 26
+                font.pointSize: 16
             }
 
             Row{
@@ -110,18 +112,6 @@ Page {
             }
         }
     }
-
-
-    /*DropShadow{
-    source : container
-    anchors.fill : container
-    color: "#ff0000"
-    horizontalOffset: 3
-    verticalOffset: 3
-    samples : 17
-    radius : 20
-    }*/
-
 
 
 }
