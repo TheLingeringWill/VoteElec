@@ -59,6 +59,7 @@ SOURCES       = ../app/VoteElec.cpp \
 		../app/res/election.cpp \
 		../app/res/electionlistmodel.cpp \
 		../app/res/elector.cpp \
+		../app/res/fileio.cpp \
 		../app/res/person.cpp \
 		../app/res/vesqlquerymodel.cpp qrc_resources_user.cpp \
 		moc_User.cpp \
@@ -68,6 +69,7 @@ SOURCES       = ../app/VoteElec.cpp \
 		moc_election.cpp \
 		moc_electionlistmodel.cpp \
 		moc_elector.cpp \
+		moc_fileio.cpp \
 		moc_person.cpp \
 		moc_vesqlquerymodel.cpp
 OBJECTS       = VoteElec.o \
@@ -77,6 +79,7 @@ OBJECTS       = VoteElec.o \
 		election.o \
 		electionlistmodel.o \
 		elector.o \
+		fileio.o \
 		person.o \
 		vesqlquerymodel.o \
 		qrc_resources_user.o \
@@ -87,6 +90,7 @@ OBJECTS       = VoteElec.o \
 		moc_election.o \
 		moc_electionlistmodel.o \
 		moc_elector.o \
+		moc_fileio.o \
 		moc_person.o \
 		moc_vesqlquerymodel.o
 DIST          = ../app/qml/CandidateProgram.qml \
@@ -304,6 +308,7 @@ DIST          = ../app/qml/CandidateProgram.qml \
 		../app/res/election.h \
 		../app/res/electionlistmodel.h \
 		../app/res/elector.h \
+		../app/res/fileio.h \
 		../app/res/person.h \
 		../app/res/vesqlquerymodel.h ../app/VoteElec.cpp \
 		../app/res/CandidateListModel.cpp \
@@ -312,6 +317,7 @@ DIST          = ../app/qml/CandidateProgram.qml \
 		../app/res/election.cpp \
 		../app/res/electionlistmodel.cpp \
 		../app/res/elector.cpp \
+		../app/res/fileio.cpp \
 		../app/res/person.cpp \
 		../app/res/vesqlquerymodel.cpp
 QMAKE_TARGET  = VoteElec
@@ -740,8 +746,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../Felgo/Felgo/gcc_64/mkspecs/common/felgo/resources_user.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../Felgo/Felgo/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../app/res/User.h ../app/res/adresse.h ../app/res/candidate.h ../app/res/candidateListModel.h ../app/res/election.h ../app/res/electionlistmodel.h ../app/res/elector.h ../app/res/person.h ../app/res/vesqlquerymodel.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../app/VoteElec.cpp ../app/res/CandidateListModel.cpp ../app/res/adresse.cpp ../app/res/candidate.cpp ../app/res/election.cpp ../app/res/electionlistmodel.cpp ../app/res/elector.cpp ../app/res/person.cpp ../app/res/vesqlquerymodel.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../app/res/User.h ../app/res/adresse.h ../app/res/candidate.h ../app/res/candidateListModel.h ../app/res/election.h ../app/res/electionlistmodel.h ../app/res/elector.h ../app/res/fileio.h ../app/res/person.h ../app/res/vesqlquerymodel.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../app/VoteElec.cpp ../app/res/CandidateListModel.cpp ../app/res/adresse.cpp ../app/res/candidate.cpp ../app/res/election.cpp ../app/res/electionlistmodel.cpp ../app/res/elector.cpp ../app/res/fileio.cpp ../app/res/person.cpp ../app/res/vesqlquerymodel.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -784,9 +790,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../../../Felgo/Felgo/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -Wall -Wextra -dM -E -o moc_predefs.h ../../../../Felgo/Felgo/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_User.cpp moc_adresse.cpp moc_candidate.cpp moc_candidateListModel.cpp moc_election.cpp moc_electionlistmodel.cpp moc_elector.cpp moc_person.cpp moc_vesqlquerymodel.cpp
+compiler_moc_header_make_all: moc_User.cpp moc_adresse.cpp moc_candidate.cpp moc_candidateListModel.cpp moc_election.cpp moc_electionlistmodel.cpp moc_elector.cpp moc_fileio.cpp moc_person.cpp moc_vesqlquerymodel.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_User.cpp moc_adresse.cpp moc_candidate.cpp moc_candidateListModel.cpp moc_election.cpp moc_electionlistmodel.cpp moc_elector.cpp moc_person.cpp moc_vesqlquerymodel.cpp
+	-$(DEL_FILE) moc_User.cpp moc_adresse.cpp moc_candidate.cpp moc_candidateListModel.cpp moc_election.cpp moc_electionlistmodel.cpp moc_elector.cpp moc_fileio.cpp moc_person.cpp moc_vesqlquerymodel.cpp
 moc_User.cpp: ../app/res/User.h \
 		../../../../Felgo/Felgo/gcc_64/include/QtCore/QObject \
 		../../../../Felgo/Felgo/gcc_64/include/QtCore/qobject.h \
@@ -1248,6 +1254,64 @@ moc_elector.cpp: ../app/res/elector.h \
 		../../../../Felgo/Felgo/gcc_64/bin/moc
 	/home/boy/Felgo/Felgo/gcc_64/bin/moc $(DEFINES) --include /home/boy/Documents/programming/VoteElec/build/moc_predefs.h -I/home/boy/Felgo/Felgo/gcc_64/mkspecs/linux-g++ -I/home/boy/Documents/programming/VoteElec -I/include/Felgo -I/home/boy/Felgo/Felgo/gcc_64/include/Felgo -I/home/boy/Felgo/Felgo/gcc_64/include -I/home/boy/Felgo/Felgo/gcc_64/include/QtLocation -I/home/boy/Felgo/Felgo/gcc_64/include/QtPositioningQuick -I/home/boy/Felgo/Felgo/gcc_64/include/QtQuickControls2 -I/home/boy/Felgo/Felgo/gcc_64/include/QtQuick/5.15.2 -I/home/boy/Felgo/Felgo/gcc_64/include/QtQuick/5.15.2/QtQuick -I/home/boy/Felgo/Felgo/gcc_64/include/Qt3DQuick -I/home/boy/Felgo/Felgo/gcc_64/include/QtQuick -I/home/boy/Felgo/Felgo/gcc_64/include/QtCharts -I/home/boy/Felgo/Felgo/gcc_64/include/QtSvg -I/home/boy/Felgo/Felgo/gcc_64/include/QtWidgets -I/home/boy/Felgo/Felgo/gcc_64/include/QtGui/5.15.2 -I/home/boy/Felgo/Felgo/gcc_64/include/QtGui/5.15.2/QtGui -I/home/boy/Felgo/Felgo/gcc_64/include/Qt3DExtras -I/home/boy/Felgo/Felgo/gcc_64/include/Qt3DRender -I/home/boy/Felgo/Felgo/gcc_64/include/Qt3DInput -I/home/boy/Felgo/Felgo/gcc_64/include/Qt3DLogic -I/home/boy/Felgo/Felgo/gcc_64/include/Qt3DCore -I/home/boy/Felgo/Felgo/gcc_64/include/QtGamepad -I/home/boy/Felgo/Felgo/gcc_64/include/QtMultimedia -I/home/boy/Felgo/Felgo/gcc_64/include/QtGui -I/home/boy/Felgo/Felgo/gcc_64/include/QtPositioning -I/home/boy/Felgo/Felgo/gcc_64/include/QtQmlModels/5.15.2 -I/home/boy/Felgo/Felgo/gcc_64/include/QtQmlModels/5.15.2/QtQmlModels -I/home/boy/Felgo/Felgo/gcc_64/include/QtQmlModels -I/home/boy/Felgo/Felgo/gcc_64/include/QtQml/5.15.2 -I/home/boy/Felgo/Felgo/gcc_64/include/QtQml/5.15.2/QtQml -I/home/boy/Felgo/Felgo/gcc_64/include/QtQml -I/home/boy/Felgo/Felgo/gcc_64/include/QtWebSockets -I/home/boy/Felgo/Felgo/gcc_64/include/QtNetwork -I/home/boy/Felgo/Felgo/gcc_64/include/QtSensors -I/home/boy/Felgo/Felgo/gcc_64/include/QtCore/5.15.2 -I/home/boy/Felgo/Felgo/gcc_64/include/QtCore/5.15.2/QtCore -I/home/boy/Felgo/Felgo/gcc_64/include/QtBluetooth -I/home/boy/Felgo/Felgo/gcc_64/include/QtNfc -I/home/boy/Felgo/Felgo/gcc_64/include/QtSql -I/home/boy/Felgo/Felgo/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../app/res/elector.h -o moc_elector.cpp
 
+moc_fileio.cpp: ../app/res/fileio.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/QObject \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qobject.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qnamespace.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qglobal.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qconfig.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qtcore-config.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qlogging.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qflags.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qatomic.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qmutex.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qnumeric.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstring.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qchar.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qbytearray.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qrefcount.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qarraydata.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringliteral.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringview.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qlist.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qiterator.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qpair.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qvector.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qcontainertools_impl.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qpoint.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringlist.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qregexp.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qmetatype.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qobject_impl.h \
+		moc_predefs.h \
+		../../../../Felgo/Felgo/gcc_64/bin/moc
+	/home/boy/Felgo/Felgo/gcc_64/bin/moc $(DEFINES) --include /home/boy/Documents/programming/VoteElec/build/moc_predefs.h -I/home/boy/Felgo/Felgo/gcc_64/mkspecs/linux-g++ -I/home/boy/Documents/programming/VoteElec -I/include/Felgo -I/home/boy/Felgo/Felgo/gcc_64/include/Felgo -I/home/boy/Felgo/Felgo/gcc_64/include -I/home/boy/Felgo/Felgo/gcc_64/include/QtLocation -I/home/boy/Felgo/Felgo/gcc_64/include/QtPositioningQuick -I/home/boy/Felgo/Felgo/gcc_64/include/QtQuickControls2 -I/home/boy/Felgo/Felgo/gcc_64/include/QtQuick/5.15.2 -I/home/boy/Felgo/Felgo/gcc_64/include/QtQuick/5.15.2/QtQuick -I/home/boy/Felgo/Felgo/gcc_64/include/Qt3DQuick -I/home/boy/Felgo/Felgo/gcc_64/include/QtQuick -I/home/boy/Felgo/Felgo/gcc_64/include/QtCharts -I/home/boy/Felgo/Felgo/gcc_64/include/QtSvg -I/home/boy/Felgo/Felgo/gcc_64/include/QtWidgets -I/home/boy/Felgo/Felgo/gcc_64/include/QtGui/5.15.2 -I/home/boy/Felgo/Felgo/gcc_64/include/QtGui/5.15.2/QtGui -I/home/boy/Felgo/Felgo/gcc_64/include/Qt3DExtras -I/home/boy/Felgo/Felgo/gcc_64/include/Qt3DRender -I/home/boy/Felgo/Felgo/gcc_64/include/Qt3DInput -I/home/boy/Felgo/Felgo/gcc_64/include/Qt3DLogic -I/home/boy/Felgo/Felgo/gcc_64/include/Qt3DCore -I/home/boy/Felgo/Felgo/gcc_64/include/QtGamepad -I/home/boy/Felgo/Felgo/gcc_64/include/QtMultimedia -I/home/boy/Felgo/Felgo/gcc_64/include/QtGui -I/home/boy/Felgo/Felgo/gcc_64/include/QtPositioning -I/home/boy/Felgo/Felgo/gcc_64/include/QtQmlModels/5.15.2 -I/home/boy/Felgo/Felgo/gcc_64/include/QtQmlModels/5.15.2/QtQmlModels -I/home/boy/Felgo/Felgo/gcc_64/include/QtQmlModels -I/home/boy/Felgo/Felgo/gcc_64/include/QtQml/5.15.2 -I/home/boy/Felgo/Felgo/gcc_64/include/QtQml/5.15.2/QtQml -I/home/boy/Felgo/Felgo/gcc_64/include/QtQml -I/home/boy/Felgo/Felgo/gcc_64/include/QtWebSockets -I/home/boy/Felgo/Felgo/gcc_64/include/QtNetwork -I/home/boy/Felgo/Felgo/gcc_64/include/QtSensors -I/home/boy/Felgo/Felgo/gcc_64/include/QtCore/5.15.2 -I/home/boy/Felgo/Felgo/gcc_64/include/QtCore/5.15.2/QtCore -I/home/boy/Felgo/Felgo/gcc_64/include/QtBluetooth -I/home/boy/Felgo/Felgo/gcc_64/include/QtNfc -I/home/boy/Felgo/Felgo/gcc_64/include/QtSql -I/home/boy/Felgo/Felgo/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../app/res/fileio.h -o moc_fileio.cpp
+
 moc_person.cpp: ../app/res/person.h \
 		../app/res/User.h \
 		../../../../Felgo/Felgo/gcc_64/include/QtCore/QObject \
@@ -1384,6 +1448,12 @@ moc_vesqlquerymodel.cpp: ../app/res/vesqlquerymodel.h \
 		../../../../Felgo/Felgo/gcc_64/include/QtCore/qsharedpointer_impl.h \
 		../../../../Felgo/Felgo/gcc_64/include/QtSql/qsqldatabase.h \
 		../../../../Felgo/Felgo/gcc_64/include/QtCore/QDebug \
+		../../../../Felgo/Felgo/gcc_64/include/QtSql/QSqlRecord \
+		../../../../Felgo/Felgo/gcc_64/include/QtSql/qsqlrecord.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtSql/QSqlError \
+		../../../../Felgo/Felgo/gcc_64/include/QtSql/qsqlerror.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtSql/QSqlQuery \
+		../../../../Felgo/Felgo/gcc_64/include/QtSql/qsqlquery.h \
 		moc_predefs.h \
 		../../../../Felgo/Felgo/gcc_64/bin/moc
 	/home/boy/Felgo/Felgo/gcc_64/bin/moc $(DEFINES) --include /home/boy/Documents/programming/VoteElec/build/moc_predefs.h -I/home/boy/Felgo/Felgo/gcc_64/mkspecs/linux-g++ -I/home/boy/Documents/programming/VoteElec -I/include/Felgo -I/home/boy/Felgo/Felgo/gcc_64/include/Felgo -I/home/boy/Felgo/Felgo/gcc_64/include -I/home/boy/Felgo/Felgo/gcc_64/include/QtLocation -I/home/boy/Felgo/Felgo/gcc_64/include/QtPositioningQuick -I/home/boy/Felgo/Felgo/gcc_64/include/QtQuickControls2 -I/home/boy/Felgo/Felgo/gcc_64/include/QtQuick/5.15.2 -I/home/boy/Felgo/Felgo/gcc_64/include/QtQuick/5.15.2/QtQuick -I/home/boy/Felgo/Felgo/gcc_64/include/Qt3DQuick -I/home/boy/Felgo/Felgo/gcc_64/include/QtQuick -I/home/boy/Felgo/Felgo/gcc_64/include/QtCharts -I/home/boy/Felgo/Felgo/gcc_64/include/QtSvg -I/home/boy/Felgo/Felgo/gcc_64/include/QtWidgets -I/home/boy/Felgo/Felgo/gcc_64/include/QtGui/5.15.2 -I/home/boy/Felgo/Felgo/gcc_64/include/QtGui/5.15.2/QtGui -I/home/boy/Felgo/Felgo/gcc_64/include/Qt3DExtras -I/home/boy/Felgo/Felgo/gcc_64/include/Qt3DRender -I/home/boy/Felgo/Felgo/gcc_64/include/Qt3DInput -I/home/boy/Felgo/Felgo/gcc_64/include/Qt3DLogic -I/home/boy/Felgo/Felgo/gcc_64/include/Qt3DCore -I/home/boy/Felgo/Felgo/gcc_64/include/QtGamepad -I/home/boy/Felgo/Felgo/gcc_64/include/QtMultimedia -I/home/boy/Felgo/Felgo/gcc_64/include/QtGui -I/home/boy/Felgo/Felgo/gcc_64/include/QtPositioning -I/home/boy/Felgo/Felgo/gcc_64/include/QtQmlModels/5.15.2 -I/home/boy/Felgo/Felgo/gcc_64/include/QtQmlModels/5.15.2/QtQmlModels -I/home/boy/Felgo/Felgo/gcc_64/include/QtQmlModels -I/home/boy/Felgo/Felgo/gcc_64/include/QtQml/5.15.2 -I/home/boy/Felgo/Felgo/gcc_64/include/QtQml/5.15.2/QtQml -I/home/boy/Felgo/Felgo/gcc_64/include/QtQml -I/home/boy/Felgo/Felgo/gcc_64/include/QtWebSockets -I/home/boy/Felgo/Felgo/gcc_64/include/QtNetwork -I/home/boy/Felgo/Felgo/gcc_64/include/QtSensors -I/home/boy/Felgo/Felgo/gcc_64/include/QtCore/5.15.2 -I/home/boy/Felgo/Felgo/gcc_64/include/QtCore/5.15.2/QtCore -I/home/boy/Felgo/Felgo/gcc_64/include/QtBluetooth -I/home/boy/Felgo/Felgo/gcc_64/include/QtNfc -I/home/boy/Felgo/Felgo/gcc_64/include/QtSql -I/home/boy/Felgo/Felgo/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../app/res/vesqlquerymodel.h -o moc_vesqlquerymodel.cpp
@@ -1553,12 +1623,15 @@ VoteElec.o: ../app/VoteElec.cpp ../../../../Felgo/Felgo/gcc_64/include/QtWidgets
 		../../../../Felgo/Felgo/gcc_64/include/QtCore/qabstractitemmodel.h \
 		../../../../Felgo/Felgo/gcc_64/include/QtSql/qsqldatabase.h \
 		../../../../Felgo/Felgo/gcc_64/include/QtCore/QDebug \
+		../../../../Felgo/Felgo/gcc_64/include/QtSql/QSqlRecord \
+		../../../../Felgo/Felgo/gcc_64/include/QtSql/qsqlrecord.h \
 		../../../../Felgo/Felgo/gcc_64/include/QtSql/QSqlError \
 		../../../../Felgo/Felgo/gcc_64/include/QtSql/qsqlerror.h \
-		../../../../Felgo/Felgo/gcc_64/include/QtSql \
-		../../../../Felgo/Felgo/gcc_64/include/QtSql/QSqlDatabase \
 		../../../../Felgo/Felgo/gcc_64/include/QtSql/QSqlQuery \
-		../../../../Felgo/Felgo/gcc_64/include/QtSql/qsqlquery.h
+		../../../../Felgo/Felgo/gcc_64/include/QtSql/qsqlquery.h \
+		../app/res/fileio.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtSql \
+		../../../../Felgo/Felgo/gcc_64/include/QtSql/QSqlDatabase
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o VoteElec.o ../app/VoteElec.cpp
 
 CandidateListModel.o: ../app/res/CandidateListModel.cpp ../app/res/candidateListModel.h \
@@ -1956,6 +2029,78 @@ elector.o: ../app/res/elector.cpp ../app/res/elector.h \
 		../../../../Felgo/Felgo/gcc_64/include/QtCore/qhash.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o elector.o ../app/res/elector.cpp
 
+fileio.o: ../app/res/fileio.cpp ../app/res/fileio.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/QObject \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qobject.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qnamespace.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qglobal.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qconfig.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qtcore-config.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qlogging.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qflags.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qatomic.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qmutex.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qnumeric.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstring.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qchar.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qbytearray.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qrefcount.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qarraydata.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringliteral.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringview.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qlist.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qiterator.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qpair.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qvector.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qcontainertools_impl.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qpoint.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringlist.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qregexp.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qmetatype.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qobject_impl.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/QFile \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qfile.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qfiledevice.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qiodevice.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/QTextStream \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qtextstream.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qlocale.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qvariant.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qmap.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qdebug.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qhash.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qset.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qshareddata.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtCore/qsharedpointer_impl.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o fileio.o ../app/res/fileio.cpp
+
 person.o: ../app/res/person.cpp ../app/res/person.h \
 		../app/res/User.h \
 		../../../../Felgo/Felgo/gcc_64/include/QtCore/QObject \
@@ -2092,10 +2237,12 @@ vesqlquerymodel.o: ../app/res/vesqlquerymodel.cpp ../app/res/vesqlquerymodel.h \
 		../../../../Felgo/Felgo/gcc_64/include/QtCore/QDebug \
 		../../../../Felgo/Felgo/gcc_64/include/QtSql/QSqlRecord \
 		../../../../Felgo/Felgo/gcc_64/include/QtSql/qsqlrecord.h \
-		../../../../Felgo/Felgo/gcc_64/include/QtSql/QSqlField \
-		../../../../Felgo/Felgo/gcc_64/include/QtSql/qsqlfield.h \
 		../../../../Felgo/Felgo/gcc_64/include/QtSql/QSqlError \
-		../../../../Felgo/Felgo/gcc_64/include/QtSql/qsqlerror.h
+		../../../../Felgo/Felgo/gcc_64/include/QtSql/qsqlerror.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtSql/QSqlQuery \
+		../../../../Felgo/Felgo/gcc_64/include/QtSql/qsqlquery.h \
+		../../../../Felgo/Felgo/gcc_64/include/QtSql/QSqlField \
+		../../../../Felgo/Felgo/gcc_64/include/QtSql/qsqlfield.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o vesqlquerymodel.o ../app/res/vesqlquerymodel.cpp
 
 qrc_resources_user.o: qrc_resources_user.cpp 
@@ -2121,6 +2268,9 @@ moc_electionlistmodel.o: moc_electionlistmodel.cpp
 
 moc_elector.o: moc_elector.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_elector.o moc_elector.cpp
+
+moc_fileio.o: moc_fileio.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_fileio.o moc_fileio.cpp
 
 moc_person.o: moc_person.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_person.o moc_person.cpp

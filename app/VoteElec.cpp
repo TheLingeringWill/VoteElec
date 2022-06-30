@@ -10,6 +10,9 @@
 
 #include"res/vesqlquerymodel.h"
 #include<QSqlError>
+#include"res/fileio.h"
+
+#include<QByteArray>
 
 int main(int argc, char *argv[])
 {
@@ -55,6 +58,9 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("_electionListModel",electionListModel);
     engine.rootContext()->setContextProperty("_candidateListModel",candidateListModel);
     engine.rootContext()->setContextProperty("_userInfoModel",userInfoModel);
+
+    qmlRegisterType<FileIO, 1>("FileIO", 1, 0, "FileIO");
+
 
 
 

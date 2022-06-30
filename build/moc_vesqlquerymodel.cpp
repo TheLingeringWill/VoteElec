@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_VESqlQueryModel_t {
-    QByteArrayData data[14];
-    char stringdata0[150];
+    QByteArrayData data[24];
+    char stringdata0[225];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -40,18 +40,30 @@ QT_MOC_LITERAL(4, 42, 12), // "electionName"
 QT_MOC_LITERAL(5, 55, 8), // "isLogged"
 QT_MOC_LITERAL(6, 64, 10), // "numElector"
 QT_MOC_LITERAL(7, 75, 8), // "password"
-QT_MOC_LITERAL(8, 84, 8), // "hasVoted"
-QT_MOC_LITERAL(9, 93, 12), // "nameElection"
-QT_MOC_LITERAL(10, 106, 4), // "vote"
-QT_MOC_LITERAL(11, 111, 11), // "idCandidate"
-QT_MOC_LITERAL(12, 123, 11), // "elctionName"
-QT_MOC_LITERAL(13, 135, 14) // "getParticipate"
+QT_MOC_LITERAL(8, 84, 10), // "isRegister"
+QT_MOC_LITERAL(9, 95, 10), // "numCitizen"
+QT_MOC_LITERAL(10, 106, 9), // "firstName"
+QT_MOC_LITERAL(11, 116, 8), // "lastName"
+QT_MOC_LITERAL(12, 125, 6), // "gender"
+QT_MOC_LITERAL(13, 132, 5), // "birth"
+QT_MOC_LITERAL(14, 138, 8), // "hasVoted"
+QT_MOC_LITERAL(15, 147, 12), // "nameElection"
+QT_MOC_LITERAL(16, 160, 4), // "vote"
+QT_MOC_LITERAL(17, 165, 11), // "idCandidate"
+QT_MOC_LITERAL(18, 177, 11), // "elctionName"
+QT_MOC_LITERAL(19, 189, 7), // "getUser"
+QT_MOC_LITERAL(20, 197, 3), // "tel"
+QT_MOC_LITERAL(21, 201, 4), // "mail"
+QT_MOC_LITERAL(22, 206, 3), // "mdp"
+QT_MOC_LITERAL(23, 210, 14) // "getParticipate"
 
     },
     "VESqlQueryModel\0getElection\0\0getCandidate\0"
     "electionName\0isLogged\0numElector\0"
-    "password\0hasVoted\0nameElection\0vote\0"
-    "idCandidate\0elctionName\0getParticipate"
+    "password\0isRegister\0numCitizen\0firstName\0"
+    "lastName\0gender\0birth\0hasVoted\0"
+    "nameElection\0vote\0idCandidate\0elctionName\0"
+    "getUser\0tel\0mail\0mdp\0getParticipate"
 };
 #undef QT_MOC_LITERAL
 
@@ -61,7 +73,7 @@ static const uint qt_meta_data_VESqlQueryModel[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -69,19 +81,23 @@ static const uint qt_meta_data_VESqlQueryModel[] = {
        0,       // signalCount
 
  // methods: name, argc, parameters, tag, flags
-       1,    0,   44,    2, 0x02 /* Public */,
-       3,    1,   45,    2, 0x02 /* Public */,
-       5,    2,   48,    2, 0x02 /* Public */,
-       8,    2,   53,    2, 0x02 /* Public */,
-      10,    3,   58,    2, 0x02 /* Public */,
-      13,    1,   65,    2, 0x02 /* Public */,
+       1,    0,   54,    2, 0x02 /* Public */,
+       3,    1,   55,    2, 0x02 /* Public */,
+       5,    2,   58,    2, 0x02 /* Public */,
+       8,    6,   63,    2, 0x02 /* Public */,
+      14,    2,   76,    2, 0x02 /* Public */,
+      16,    3,   81,    2, 0x02 /* Public */,
+      19,    4,   88,    2, 0x02 /* Public */,
+      23,    1,   97,    2, 0x02 /* Public */,
 
  // methods: parameters
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString,    4,
     QMetaType::Bool, QMetaType::QString, QMetaType::QString,    6,    7,
-    QMetaType::Bool, QMetaType::QString, QMetaType::QString,    9,    6,
-    QMetaType::Void, QMetaType::QString, QMetaType::Int, QMetaType::QString,    6,   11,   12,
+    QMetaType::Bool, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString,    6,    9,   10,   11,   12,   13,
+    QMetaType::Bool, QMetaType::QString, QMetaType::QString,   15,    6,
+    QMetaType::Void, QMetaType::QString, QMetaType::Int, QMetaType::QString,    6,   17,   18,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString,    6,   20,   21,   22,
     QMetaType::Void, QMetaType::QString,    6,
 
        0        // eod
@@ -97,10 +113,13 @@ void VESqlQueryModel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         case 1: _t->getCandidate((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 2: { bool _r = _t->isLogged((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 3: { bool _r = _t->hasVoted((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])));
+        case 3: { bool _r = _t->isRegister((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3])),(*reinterpret_cast< const QString(*)>(_a[4])),(*reinterpret_cast< const QString(*)>(_a[5])),(*reinterpret_cast< const QString(*)>(_a[6])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 4: _t->vote((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3]))); break;
-        case 5: _t->getParticipate((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 4: { bool _r = _t->hasVoted((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])));
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
+        case 5: _t->vote((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3]))); break;
+        case 6: _t->getUser((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3])),(*reinterpret_cast< const QString(*)>(_a[4]))); break;
+        case 7: _t->getParticipate((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -135,13 +154,13 @@ int VESqlQueryModel::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 8)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 6;
+        _id -= 8;
     }
     return _id;
 }

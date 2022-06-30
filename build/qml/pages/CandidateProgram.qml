@@ -1,7 +1,7 @@
 import QtQuick 2.9
 import Felgo 3.0
 import QtQuick.Layouts 1.1
-
+import FileIO 1.0
 FlickablePage
 {
     id:candidateProgram
@@ -11,13 +11,23 @@ FlickablePage
     property int id:0
     property string name:""
     property string program:""
+    property string sourceIm:""
+
+    FileIO{
+        id:myFile
+
+    }
 
     Connections{
         target: logic
         onFetchCandidateDetails:{
             id = idCandidate
             name = nameCandidate
-            program = programCandidate
+            myFile.source = programCandidate
+            console.log(myFile.source)
+            program = myFile.read()
+
+            sourceIm = sourceCandidate
         }
     }
 
@@ -69,9 +79,9 @@ FlickablePage
             AppImage
             {
                 id:president
-                fillMode: Image.PreserveAspectFit
+                width:dp(140)
                 height: dp(140)
-                source:"../../assets/Emmanuel_Macron.png"
+                source:sourceIm
             }
 
             AppImage

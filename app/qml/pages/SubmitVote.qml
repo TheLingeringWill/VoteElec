@@ -80,7 +80,7 @@ FlickablePage
 
                                     AppImage
                                     {
-                                        source:"../../assets/Emmanuel_Macron.png"
+                                        source:model.picture
                                         width:parent.width/2
                                         height: parent.width/2
                                         anchors.horizontalCenter: parent.horizontalCenter
@@ -126,7 +126,7 @@ FlickablePage
                                                 icon:  IconType.diamond
                                                 onClicked:
                                                 {
-                                                    logic.fetchCandidateDetails(model.candidate_id, model.first_name + '\n' + model.last_name,model.program,"")
+                                                    logic.fetchCandidateDetails(model.candidate_id, model.first_name + '\n' + model.last_name,model.program,model.picture)
                                                     submitVote.navigationStack.push(cp)
                                                 }
                                             }

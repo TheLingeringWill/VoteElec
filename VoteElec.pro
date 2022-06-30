@@ -41,6 +41,7 @@ SOURCES += app/VoteElec.cpp \
     app/res/election.cpp \
     app/res/electionlistmodel.cpp \
     app/res/elector.cpp \
+    app/res/fileio.cpp \
     app/res/person.cpp \
     app/res/vesqlquerymodel.cpp
 
@@ -71,6 +72,7 @@ HEADERS += \
     app/res/election.h \
     app/res/electionlistmodel.h \
     app/res/elector.h \
+    app/res/fileio.h \
     app/res/person.h \
     app/res/vesqlquerymodel.h
 

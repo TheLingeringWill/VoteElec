@@ -1,12 +1,16 @@
-import QtQuick 2.0
+import QtQuick 2.8
 import Felgo 3.0
+import QtQuick.Layouts 1.1
+import QtQuick.Dialogs 1.1
 
 Page {
     id: login
 
+
+
     Rectangle{
         id: top_page
-        width: parent.width / 3
+        width: texte.width
         anchors.horizontalCenter: parent.horizontalCenter
 
         AppImage
@@ -32,32 +36,32 @@ Page {
 
     Rectangle {
         id: rect_connexion
-        width: parent.width / 3
+        width: texte.width  + dp(10)
+        Layout.minimumWidth : texte.width
         height: parent.height / 2
         color: "#f8f8f8"
         radius: 20
-        border.width: 0
         anchors.top: parent.top
         anchors.topMargin: 180
         anchors.horizontalCenter: parent.horizontalCenter
 
         Column {
             id: column
-            anchors.bottomMargin: 10
-            anchors.topMargin: 10
+            anchors.bottomMargin: parent.height / 10
+            anchors.topMargin: parent.height / 10
             anchors.fill: parent
             spacing: parent.height / 12
 
             Text {
                 id: texte
-                width: parent.width
+
                 text: "Veuillez saisir vos identifiants pour vous connecter à votre espace électeur"
                 wrapMode: Text.WordWrap
                 transformOrigin: Item.Center
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.family: "Arial"
                 horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: 20
+                font.pixelSize: 16
             }
 
 
@@ -69,6 +73,9 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 backgroundColor: "white"
                 font.pointSize: 15
+                validator: RegExpValidator {
+                    regExp: /[0-9]+/
+                }
             }
 
 
@@ -99,6 +106,7 @@ Page {
                        login.navigationStack.popAllExceptFirst()
                        logic.login(num_elec.text)
 
+
                    }
                    else {
                        errorLogin.visible=true
@@ -106,16 +114,17 @@ Page {
                 }
             }
 
-            AppText{
-                id:errorLogin
-                text:"Wrong parameter"
-                visible: false
-                anchors.horizontalCenter: parent.horizontalCenter
-                color:"red"
+            MessageDialog
+            {
+                id: errorLogin
+                title: "May I have your attention please"
+                text: "Cannot login"
+                onAccepted: {
+                    errorLogin.close()
+                }
             }
         }
     }
-
 
 
     Rectangle{
@@ -141,7 +150,4 @@ Page {
 
         }
     }
-
-
 }
-

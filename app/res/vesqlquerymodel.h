@@ -6,6 +6,7 @@
 #include<QSqlRecord>
 #include<QSqlError>
 #include<QSqlQuery>
+#include<QCryptographicHash>
 
 class VESqlQueryModel :  public QSqlQueryModel
 {
@@ -21,9 +22,17 @@ public:
     Q_INVOKABLE void getCandidate(const QString& electionName);
     //Q_INVOKABLE void addParticipates
     Q_INVOKABLE bool isLogged(const QString& numElector, const QString& password);
+    Q_INVOKABLE bool isRegister(const QString& numElector,
+                                const QString& numCitizen,
+                                const QString& firstName,
+                                const QString& lastName,
+                                const QString& gender,
+                                const QString& birth);
     Q_INVOKABLE bool hasVoted(const QString& nameElection, const QString& numElector);
     Q_INVOKABLE void vote(const QString& numElector, int idCandidate, const QString& elctionName);
+    Q_INVOKABLE void getUser(const QString& numElector,const QString& tel, const QString& mail, const QString& mdp);
     Q_INVOKABLE void getParticipate(const QString& numElector);
+
 
     QVariant data(const QModelIndex &index, int role) const override;
 
@@ -37,6 +46,10 @@ private:
     void setQuery(const QString &query);
 };
 
+static inline QString hash(const QString& wordToHash){
+    return QCryptographicHash::hash(wordToHash.toLocal8Bit(),QCryptographicHash::Sha256).toHex();
+}
+
 inline void VESqlQueryModel::getElection()
 {
     setQuery("SELECT * FROM Election");
@@ -44,7 +57,6 @@ inline void VESqlQueryModel::getElection()
 
 inline void VESqlQueryModel::getCandidate(const QString& electionName)
 {
-
     setQuery("SELECT p.first_name, p.last_name, c.program, c.candidate_id, c.picture, e.name "
              "FROM Candidate c "
              "JOIN Person p "
@@ -58,7 +70,29 @@ inline void VESqlQueryModel::getCandidate(const QString& electionName)
 
 inline bool VESqlQueryModel::isLogged(const QString& numElector, const QString& password)
 {
-    QSqlQueryModel::setQuery("SELECT EXISTS (SELECT * FROM Elector WHERE num_elector='" + numElector + "' AND password is '" + password + "' )");
+    QSqlQueryModel::setQuery("SELECT EXISTS (SELECT * FROM Elector WHERE num_elector='" + numElector + "' AND password is '" + hash(password) + "' )");
+    qDebug() << hash(password);
+    return record(0).value(0) == 1 ? true : false;
+}
+
+inline bool VESqlQueryModel::isRegister(const QString& numElector,
+                                        const QString& numCitizen,
+                                        const QString& firstName,
+                                        const QString& lastName,
+                                        const QString& gender,
+                                        const QString& birth)
+{
+    QSqlQueryModel::setQuery("SELECT EXISTS "
+                             "(SELECT * FROM Elector e "
+                             "JOIN Person p "
+                             "ON e.person_id = p.person_id "
+                             "WHERE e.num_elector = '" + numElector + "' "
+                             "AND e.phone is NULL "
+                             "AND p.num_citizen = '" + numCitizen + "' "
+                             "AND p.first_name = '" + firstName + "' "
+                             "AND p.last_name = '" + lastName + "' "
+                             "AND p.gender = '" + gender + "' "
+                             "AND p.birth = '" + birth + "')");
     return record(0).value(0) == 1 ? true : false;
 }
 
@@ -128,6 +162,18 @@ inline void VESqlQueryModel::getParticipate(const QString& numElector)
                              "WHERE el.num_elector = '" + numElector +"'");
     generateRoleNames();
     qDebug() << lastError();
+}
+
+inline void VESqlQueryModel::getUser(const QString& numElector,const QString& tel, const QString& mail, const QString& mdp)
+{
+    QSqlQuery query;
+    query.prepare("UPDATE Elector SET phone=:phone, email=:email, password=:password WHERE num_elector=:num_elector");
+    query.bindValue(":phone",hash(tel));
+    query.bindValue(":email", hash(mail));
+    query.bindValue(":password",hash(mdp));
+    query.bindValue(":num_elector", numElector);
+    query.exec();
+
 }
 
 
