@@ -136,7 +136,7 @@ FlickablePage
 
             Rectangle
             {
-                width: sp(200)
+                width: sp(250)
                 height: sp(250)
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 

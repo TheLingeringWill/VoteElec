@@ -89,7 +89,10 @@ INSERT INTO Person VALUES
 (4,'135545645645646','Jonathan','Elbaz','MAN','2001-03-10'),
 (5,'884631354613153','Simon','Campere','MAN','2003-09-11'),
 (6,'778785456456358','Gerard','Culot','MAN','1999-01-11'),
-(7,'464888843423154','CuiCui','Colon','WOMAN','1980-03-11');
+(7,'464888843423154','CuiCui','Colon','WOMAN','1980-03-11'),
+(8,'456545633887864','Emmanuel','Macron','MAN','1999-01-11'),
+(9,'778899878415535','Anne','Hidalgo','WOMAN','1980-10-01'),
+(10,'99911354641312','Eric','Zemmour','MAN','1901-11-01');
 
 INSERT INTO Elector VALUES
 (1,'23568238','b2ef1a67c019892bd48f06c76deaef2517986f8054978f8244e8760162db60a7','c663a0ed4956cfcf255c6463e904fd2b38600599af3bdead1a8d7aca72009af5','3246ac57ebd9570003352b7cd8038142e9fa8facb0d944c8abfb2d3de390d931',4), 
@@ -99,17 +102,30 @@ INSERT INTO Elector VALUES
 
 INSERT INTO Candidate VALUES
 (1,'assets/Programmes candidats/Résumés/Marine-Le-Pen.txt','../../assets/Programmes candidats/Marine-Le-Pen.pdf','../../assets/Photos candidats/Marine-Le-Pen.jpg',2),
-(2,'assets/Programmes candidats/Résumés/Jean-Luc-Melenchon.txt','../../assets/Programmes candidats/Jean-Luc-Melanchon.pdf','../../assets/Photos candidats/Jean-Luc-Melenchon.jpg',3);
+(2,'assets/Programmes candidats/Résumés/Jean-Luc-Melenchon.txt','../../assets/Programmes candidats/Jean-Luc-Melanchon.pdf','../../assets/Photos candidats/Jean-Luc-Melenchon.jpg',3),
+(3,'assets/Programmes candidats/Résumés/Emmanuel-Macron.txt','../../assets/Programmes candidats/Emmanuel-Macron.pdf','../../assets/Photos candidats/Emmanuel-Macron.jpg',8),
+(4,'assets/Programmes candidats/Résumés/Anne-Hidalgo.txt','../../assets/Programmes candidats/Anne-Hidalgo.pdf','../../assets/Photos candidats/Anne-Hidalgo.jpg',9),
+(5,'assets/Programmes candidats/Résumés/Eric-Zemmour.txt','../../assets/Programmes candidats/Eric-Zemmour.pdf','../../assets/Photos candidats/Eric-Zemmour.jpg',10);
+
 
 INSERT INTO Election VALUES
-(1,'municipales',NULL,'2012-04-12','2013-01-03'),
-(2,'regionales',NULL,'2012-04-12','2013-01-03');
+(1,'Presidentiel',NULL,'2012-04-12','2013-01-03'),
+(2,'Regionale',NULL,'2012-04-12','2013-01-03'),
+(3,'Municipale',NULL,'2012-04-12','2013-01-03');
 
 
 INSERT INTO Stands VALUES
 (1,1),
 (1,2),
-(2,1);
+(1,3),
+(2,1),
+(2,2),
+(3,1),
+(3,2),
+(4,1),
+(4,2),
+(4,3),
+(5,1);
 
 
 

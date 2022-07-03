@@ -84,15 +84,15 @@ FlickablePage
                 source:sourceIm
             }
 
-            AppImage
+            Rectangle
             {
                 id: rectangle
                 width: parent.width - president.width - dp(Theme.navigationBar.defaultBarItemPadding)*2 < dp(300) ? parent.width - president.width - dp(Theme.navigationBar.defaultBarItemPadding)*2 : dp(300)
                 height:dp(30)
                 anchors.top: parent.top
                 anchors.topMargin: president.height/2
-                source:"../../assets/name_box.png"
-
+                color:Theme.secondaryBackgroundColor
+                radius:dp(10)
                 AppText
                 {
                     id:namePresident
@@ -142,14 +142,14 @@ FlickablePage
 
         }
 
-        AppImage
+        Rectangle
         {
             id: appImage
-            source: "../../assets/Button.png"
+            color:Theme.secondaryBackgroundColor
             anchors.horizontalCenter: parent.horizontalCenter
             width: grid.width
             height: downloadProgram.height+10
-
+            radius:dp(10)
             GridLayout
             {
                 id:grid
@@ -169,13 +169,14 @@ FlickablePage
              }
         }
 
-        AppImage
+        Rectangle
         {
             id: appImage1
-            source: "../../assets/Button.png"
+            color:Theme.secondaryBackgroundColor
             anchors.horizontalCenter: parent.horizontalCenter
             width: grid1.width
             height: downloadProgram.height
+            radius: dp(10)
 
             GridLayout
             {

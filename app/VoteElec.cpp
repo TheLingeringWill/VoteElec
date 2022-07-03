@@ -11,7 +11,8 @@
 #include"res/vesqlquerymodel.h"
 #include<QSqlError>
 #include"res/fileio.h"
-
+#include<QSqlQuery>
+#include<QSqlRecord>
 #include<QByteArray>
 
 int main(int argc, char *argv[])
@@ -43,7 +44,16 @@ int main(int argc, char *argv[])
         if(!db.open()){
             qWarning() << "Error connectiong Database : " << db.lastError();
         }
+        qDebug() << db.lastError();
+        QSqlQuery q;
+        q.exec("SELECT * FROM Elector");
+        qDebug() << q.lastError();
     }
+
+
+
+
+
 
 
     VESqlQueryModel *electionListModel = new VESqlQueryModel(),

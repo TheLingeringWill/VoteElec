@@ -36,7 +36,7 @@ App
         NavigationItem
         {
             title: "Page d'accueil"
-            icon:IconType.cogs
+            icon:IconType.home
             id:mainHome
             NavigationStack
             {
@@ -66,7 +66,7 @@ App
 
         NavigationItem
         {
-            title:"Mon compte électeur"
+            title:"Mon compte"
             icon:IconType.cogs
 
             onSelected: logic.fetchUserInfo()
@@ -81,7 +81,7 @@ App
         NavigationItem
         {
             title:"Je vote"
-            icon:IconType.anchor
+            icon:IconType.inbox
             visible: false
 
             NavigationStack
@@ -123,7 +123,7 @@ App
         NavigationItem
         {
             title:"Me déconnecter"
-            icon:IconType.anchor
+            icon:IconType.arrowcircleoleft
 
             NavigationStack
             {
