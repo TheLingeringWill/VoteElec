@@ -1,7 +1,6 @@
 /*DROP DATABASE IF EXISTS VoteElec;
 CREATE DATABASE IF NOT EXISTS VoteElec;
-USE VoteElec;
-*/
+USE VoteElec;*/
 
 
 DROP TABLE Election;
@@ -48,8 +47,8 @@ CREATE TABLE Elector(
 CREATE TABLE Candidate(
    candidate_id INT,
    program VARCHAR(1000),
-   complete_program VARCHAR(50),
-   picture VARCHAR(20),
+   complete_program VARCHAR(100),
+   picture VARCHAR(100),
    person_id INT NOT NULL,
    PRIMARY KEY(candidate_id),
    UNIQUE(person_id),
