@@ -1,4 +1,4 @@
-#include <QApplication>
+﻿#include <QApplication>
 #include <FelgoApplication>
 
 #include <QQmlApplicationEngine>
@@ -14,6 +14,29 @@
 #include<QSqlQuery>
 #include<QSqlRecord>
 #include<QByteArray>
+#include<QFuture>
+
+#include <QtConcurrent/QtConcurrentRun>
+#include "res/chartwinner.h"
+
+
+static  QFuture<void> connectDB(QThreadPool *pool)
+{
+    return QtConcurrent::run(pool, [](){
+        if(QSqlDatabase::isDriverAvailable("QSQLITE"))
+        {
+            auto db = QSqlDatabase::addDatabase("QSQLITE", "VoteElec");
+            db.setDatabaseName("../VoteElec.db");
+
+            if(!db.open()){
+                qWarning() << "Error connectiong Database : " << db.lastError();
+            }
+            qDebug() << db.lastError();
+
+        }
+    });
+}
+
 
 int main(int argc, char *argv[])
 {
@@ -36,38 +59,56 @@ int main(int argc, char *argv[])
     // for PUBLISHING, use the entry point below
     felgo.setMainQmlFileName(QStringLiteral("qml/Main.qml"));
 
+
     if(QSqlDatabase::isDriverAvailable("QSQLITE"))
     {
-        QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+        auto db = QSqlDatabase::addDatabase("QSQLITE");
         db.setDatabaseName("../VoteElec.db");
 
         if(!db.open()){
             qWarning() << "Error connectiong Database : " << db.lastError();
         }
         qDebug() << db.lastError();
-        QSqlQuery q;
-        q.exec("SELECT * FROM Elector");
-        qDebug() << q.lastError();
+
     }
 
-
-
-
-
-
-
     VESqlQueryModel *electionListModel = new VESqlQueryModel(),
-                    *candidateListModel = new VESqlQueryModel(),
-                    *userInfoModel = new VESqlQueryModel();
+                        *candidateListModel = new VESqlQueryModel(),
+                        *userInfoModel = new VESqlQueryModel();
 
 
-    electionListModel->getElection();
+        electionListModel->getElection();
+
+        QStringList l{"abc", "def"};
+        QString a{"A"};
+        QVariantList a_list{1,2};
+        QString b{"B"};
+        QVariantList b_list{4,5};
+
+        QVariantMap listCandidate;
+        listCandidate.insert(a,a_list);
+        listCandidate.insert(b,b_list);
+        chartWinner c{std::move(l),std::move(listCandidate)};
+
+
+        qDebug() << c;
 
 
 
-    engine.rootContext()->setContextProperty("_electionListModel",electionListModel);
-    engine.rootContext()->setContextProperty("_candidateListModel",candidateListModel);
-    engine.rootContext()->setContextProperty("_userInfoModel",userInfoModel);
+        engine.rootContext()->setContextProperty("_electionListModel",electionListModel);
+        engine.rootContext()->setContextProperty("_candidateListModel",candidateListModel);
+        engine.rootContext()->setContextProperty("_userInfoModel",userInfoModel);
+        engine.rootContext()->setContextProperty("_chartWinner", &c);
+
+
+
+
+
+
+
+
+
+
 
     qmlRegisterType<FileIO, 1>("FileIO", 1, 0, "FileIO");
 

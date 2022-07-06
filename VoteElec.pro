@@ -1,5 +1,5 @@
 # allows to add DEPLOYMENTFOLDERS and links to the Felgo library and QtCreator auto-completion
-CONFIG += felgo felgo-live sql
+CONFIG += felgo felgo-live sql concurrent
 
 # Project identifier and version
 # More information: https://felgo.com/doc/felgo-publishing/#project-configuration
@@ -38,6 +38,7 @@ SOURCES += app/VoteElec.cpp \
     app/res/CandidateListModel.cpp \
     app/res/adresse.cpp \
     app/res/candidate.cpp \
+    app/res/chartwinner.cpp \
     app/res/election.cpp \
     app/res/electionlistmodel.cpp \
     app/res/elector.cpp \
@@ -69,6 +70,7 @@ HEADERS += \
     app/res/adresse.h \
     app/res/candidate.h \
     app/res/candidateListModel.h \
+    app/res/chartwinner.h \
     app/res/election.h \
     app/res/electionlistmodel.h \
     app/res/elector.h \
@@ -84,6 +86,7 @@ DISTFILES += \
     app/qml/Test.qml \
     app/qml/logic/Logic.qml \
     app/qml/model/DataModel.qml \
+    app/qml/pages/AdminPage.qml \
     app/qml/pages/CreateAccount.qml \
     app/qml/pages/Login.qml \
     app/qml/pages/Popup.qml \

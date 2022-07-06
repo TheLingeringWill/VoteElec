@@ -130,6 +130,17 @@ App
 
             }
         }
+
+        NavigationItem
+        {
+            title:"Admin"
+            NavigationStack
+            {
+                AdminPage{
+
+                }
+            }
+        }
     }
 
 

@@ -1,10 +1,12 @@
 import QtQuick 2.0
 import Felgo 3.0
 import QtGraphicalEffects 1.12
+import QtQuick.Window 2.2
+import QtQuick.Controls 2.12
 
-Page {
+Popup {
     id: popup_page
-    title: "Popup"
+
 
 
     Rectangle{
